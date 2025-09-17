@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barakah Homes</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for social media icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        const { useState } = React;
+
+        const App = () => {
+          const [activeTab, setActiveTab] = useState('home');
+          const [contactForm, setContactForm] = useState({ name: '', email: '', phone: '', message: '' });
+          const [propertyForm, setPropertyForm] = useState({ 
+            name: '', 
+            email: '', 
+            phone: '', 
+            address: '', 
+            description: '', 
+            price: '',
+            photos: []
+          });
+          
+          // Review state
+          const [reviews, setReviews] = useState([
+            {
+              id: 1,
+              name: "Sarah Johnson",
+              rating: 5,
+              comment: "Barakah Homes transformed our old house into a beautiful home. Their attention to detail and craftsmanship is unmatched!",
+              date: "2023-10-15"
+            },
+            {
+              id: 2,
+              name: "Michael Chen",
+              rating: 4,
+              comment: "Professional team, fair pricing, and excellent communication throughout the renovation process.",
+              date: "2023-09-22"
+            },
+            {
+              id: 3,
+              name: "Emma Rodriguez",
+              rating: 5,
+              comment: "The eco-build tiny home they created for us is perfect! Sustainable, beautiful, and exactly what we wanted.",
+              date: "2023-08-30"
+            }
+          ]);
+          
+          const [newReview, setNewReview] = useState({
+            name: '',
+            rating: 5,
+            comment: ''
+          });
+
+          // Updated contact information
+          const contactInfo = {
+            phone: "607-778-9262",
+            email: "barakahhomesny@gmail.com",
+            address: "403 Exchange Ave, Endicott, NY, 13760",
+            hours: [
+              "Monday - Friday: 8am - 6pm",
+              "Saturday: 9am - 4pm",
+              "Sunday: Closed"
+            ]
+          };
+
+          // Updated social media links
+          const socialLinks = {
+            instagram: "https://instagram.com/Barakah_Builds",
+            youtube: "https://youtube.com/@technofix9585"
+          };
+
+          const handleContactChange = (e) => {
+            setContactForm({ ...contactForm, [e.target.name]: e.target.value });
+          };
+
+          const handlePropertyChange = (e) => {
+            if (e.target.name === 'photos') {
+              const files = Array.from(e.target.files);
+              setPropertyForm({ ...propertyForm, photos: files });
+            } else {
+              setPropertyForm({ ...propertyForm, [e.target.name]: e.target.value });
+            }
+          };
+
+          const handleReviewChange = (e) => {
+            const { name, value } = e.target;
+            setNewReview({ ...newReview, [name]: name === 'rating' ? parseInt(value) : value });
+          };
+
+          const handleSubmitReview = (e) => {
+            e.preventDefault();
+            if (newReview.name && newReview.comment) {
+              const review = {
+                id: reviews.length + 1,
+                ...newReview,
+                date: new Date().toISOString().split('T')[0]
+              };
+              setReviews([review, ...reviews]);
+              setNewReview({ name: '', rating: 5, comment: '' });
+              alert('Thank you for your review!');
+            } else {
+              alert('Please fill in all required fields.');
+            }
+          };
+
+          const handleSubmit = (e) => {
+            e.preventDefault();
+            alert('Thank you for your submission! We will contact you soon.');
+            setContactForm({ name: '', email: '', phone: '', message: '' });
+          };
+
+          const handlePropertySubmit = (e) => {
+            e.preventDefault();
+            alert('Thank you for submitting your property! We will review it and get back to you.');
+            setPropertyForm({ 
+              name: '', 
+              email: '', 
+              phone: '', 
+              address: '', 
+              description: '', 
+              price: '', 
+              photos: [] 
+            });
+          };
+
+          const projects = [
+            {
+              id: 1,
+              title: "Historic Home Restoration",
+              before: "https://placehold.co/600x400/222/fff?text=Before+Restoration",
+              after: "https://placehold.co/600x400/4ade80/fff?text=After+Restoration",
+              description: "Complete restoration of a 1920s bungalow with eco-friendly materials"
+            },
+            {
+              id: 2,
+              title: "Modern Kitchen Renovation",
+              before: "https://placehold.co/600x400/222/fff?text=Before+Kitchen",
+              after: "https://placehold.co/600x400/3b82f6/fff?text=After+Kitchen",
+              description: "Custom cabinetry and energy-efficient appliances installation"
+            },
+            {
+              id: 3,
+              title: "Eco-Build Tiny Home",
+              before: "https://placehold.co/600x400/222/fff?text=Empty+Lot",
+              after: "https://placehold.co/600x400/f59e0b/fff?text=Completed+Tiny+Home",
+              description: "Sustainable tiny home built with reclaimed materials and solar power"
+            },
+            {
+              id: 4,
+              title: "Custom Metalwork Installation",
+              before: "https://placehold.co/600x400/222/fff?text=Plain+Staircase",
+              after: "https://placehold.co/600x400/8b5cf6/fff?text=Custom+Welded+Railing",
+              description: "Hand-forged steel railing with artistic design elements"
+            }
+          ];
+
+          // Function to render star ratings
+          const renderStars = (rating) => {
+            return (
+              <div className="flex">
+                {[...Array(5)].map((_, i) => (
+                  <svg 
+                    key={i} 
+                    className={`w-5 h-5 ${i < rating ? 'text-yellow-400' : 'text-gray-300'}`} 
+                    fill="currentColor" 
+                    viewBox="0 0 20 20"
+                  >
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                ))}
+              </div>
+            );
+          };
+
+          return (
+            <div className="min-h-screen bg-gray-50">
+              {/* Navigation */}
+              <nav className="bg-gray-900 text-white shadow-lg">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                  <div className="flex items-center justify-between h-16">
+                    <div className="flex items-center">
+                      {/* Company Logo - CUSTOMIZE THIS */}
+                      <div className="mr-3">
+                        {/* Option 1: Simple SVG Logo */}
+                        <svg className="h-10 w-10 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M12 2L2 7v10c0 5.55 3.84 9.74 9 11 5.16-1.26 9-5.45 9-11V7l-10-5z"/>
+                        </svg>
+                        
+                        {/* Option 2: Text-based logo (uncomment to use) */}
+                        {/* <div className="text-yellow-500 font-bold text-xl">BH</div> */}
+                        
+                        {/* Option 3: Your custom logo (uncomment and replace with your image) */}
+                        {/* <img src="/path/to/your/logo.png" alt="Barakah Homes Logo" className="h-10 w-10" /> */}
+                      </div>
+                      <h1 className="text-2xl font-bold">Barakah Homes</h1>
+                    </div>
+                    <div className="hidden md:block">
+                      <div className="ml-10 flex items-baseline space-x-4">
+                        {['home', 'about', 'services', 'gallery', 'reviews', 'contact', 'sell-property'].map((tab) => (
+                          <button
+                            key={tab}
+                            onClick={() => setActiveTab(tab)}
+                            className={`px-3 py-2 rounded-md text-sm font-medium capitalize transition-colors ${
+                              activeTab === tab
+                                ? 'bg-blue-600 text-white'
+                                : 'text-gray-300 hover:bg-gray-700 hover:text-white'
+                            }`}
+                          >
+                            {tab.replace('-', ' ')}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="md:hidden">
+                      <select 
+                        value={activeTab} 
+                        onChange={(e) => setActiveTab(e.target.value)}
+                        className="bg-gray-700 text-white rounded-md py-2 px-3"
+                      >
+                        {['home', 'about', 'services', 'gallery', 'reviews', 'contact', 'sell-property'].map((tab) => (
+                          <option key={tab} value={tab} className="capitalize">
+                            {tab.replace('-', ' ')}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </nav>
+
+              {/* Main Content */}
+              <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                {/* Home Page */}
+                {activeTab === 'home' && (
+                  <div className="space-y-16">
+                    {/* Hero Section */}
+                    <section className="relative bg-gradient-to-r from-blue-900 to-green-800 rounded-2xl overflow-hidden">
+                      <div className="absolute inset-0 bg-black opacity-30"></div>
+                      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+                        <div className="text-center">
+                          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
+                            Building with Purpose & Barakah
+                          </h1>
+                          <p className="text-xl md:text-2xl text-blue-100 mb-8 max-w-3xl mx-auto">
+                            Sustainable, high-quality homes crafted with integrity, innovation, and decades of welding expertise.
+                          </p>
+                          <button 
+                            onClick={() => setActiveTab('contact')}
+                            className="bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-4 px-8 rounded-full text-lg transition-transform transform hover:scale-105 shadow-lg"
+                          >
+                            Get a Free Quote
+                          </button>
+                        </div>
+                      </div>
+                      <div className="absolute bottom-0 right-0 w-1/2 h-1/2 opacity-20">
+                        <img src="https://placehold.co/800x600/4ade80/fff?text=Welding+Art" alt="Welding Art" className="object-cover" />
+                      </div>
+                    </section>
+
+                    {/* Services Preview */}
+                    <section className="py-12">
+                      <h2 className="text-3xl font-bold text-center mb-12">Our Services</h2>
+                      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                        {[
+                          { title: "Fixing & Flipping", icon: "🔧", desc: "Transform distressed properties into beautiful homes" },
+                          { title: "Renovations", icon: "🔨", desc: "Complete home makeovers with attention to detail" },
+                          { title: "Eco-Builds", icon: "🌿", desc: "Sustainable construction using eco-friendly materials" },
+                          { title: "Custom Welding", icon: "🔥", desc: "Artistic metalwork and structural welding solutions" }
+                        ].map((service, index) => (
+                          <div key={index} className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow text-center">
+                            <div className="text-4xl mb-4">{service.icon}</div>
+                            <h3 className="text-xl font-bold mb-2">{service.title}</h3>
+                            <p className="text-gray-600">{service.desc}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </section>
+
+                    {/* Featured Project */}
+                    <section className="py-12 bg-gray-100 rounded-2xl">
+                      <div className="text-center mb-12">
+                        <h2 className="text-3xl font-bold">Featured Project</h2>
+                        <p className="text-gray-600 mt-2">See the transformation we created</p>
+                      </div>
+                      <div className="grid md:grid-cols-2 gap-8 items-center">
+                        <div>
+                          <img src={projects[0].before} alt="Before" className="rounded-lg shadow-lg w-full" />
+                          <p className="text-center mt-2 font-semibold">Before</p>
+                        </div>
+                        <div>
+                          <img src={projects[0].after} alt="After" className="rounded-lg shadow-lg w-full" />
+                          <p className="text-center mt-2 font-semibold">After</p>
+                        </div>
+                      </div>
+                      <div className="mt-8 text-center">
+                        <p className="text-lg text-gray-700 max-w-2xl mx-auto">{projects[0].description}</p>
+                        <button 
+                          onClick={() => setActiveTab('gallery')}
+                          className="mt-6 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-colors"
+                        >
+                          View All Projects
+                        </button>
+                      </div>
+                    </section>
+                  </div>
+                )}
+
+                {/* About Us Page */}
+                {activeTab === 'about' && (
+                  <div className="space-y-12">
+                    <div className="text-center">
+                      <h1 className="text-4xl font-bold mb-4">About Barakah Homes</h1>
+                      <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                        Building with Purpose & Barakah since 2005
+                      </p>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 gap-12 items-center">
+                      <div>
+                        <img src="https://placehold.co/600x400/3b82f6/fff?text=Our+Team" alt="Our Team" className="rounded-lg shadow-lg" />
+                      </div>
+                      <div>
+                        <h2 className="text-2xl font-bold mb-4">Our Story</h2>
+                        <p className="text-gray-700 mb-4">
+                          Founded by master welder and eco-builder Azad Hussein, Barakah Homes began as a small workshop 
+                          specializing in custom metalwork. With over 20 years of experience in welding and design, 
+                          we've expanded our expertise to include complete home renovations and sustainable construction.
+                        </p>
+                        <p className="text-gray-700 mb-4">
+                          Our passion for craftsmanship and environmental responsibility drives everything we do. 
+                          We believe in creating spaces that not only look beautiful but also contribute positively 
+                          to our community and planet.
+                        </p>
+                        <div className="bg-blue-50 p-6 rounded-lg">
+                          <h3 className="text-xl font-bold text-blue-900 mb-2">Our Vision</h3>
+                          <p className="text-blue-800">"To create sustainable, high-quality homes for our community."</p>
+                        </div>
+                        <div className="bg-green-50 p-6 rounded-lg mt-4">
+                          <h3 className="text-xl font-bold text-green-900 mb-2">Our Mission</h3>
+                          <p className="text-green-800">"We build, restore, and improve homes with honesty and innovation."</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="bg-gray-100 rounded-xl p-8">
+                      <h2 className="text-2xl font-bold mb-6 text-center">Our Expertise</h2>
+                      <div className="grid md:grid-cols-3 gap-8">
+                        <div className="text-center">
+                          <div className="text-4xl mb-4">🔥</div>
+                          <h3 className="text-xl font-bold mb-2">Master Welding</h3>
+                          <p className="text-gray-600">20+ years of experience in structural and artistic metalwork</p>
+                        </div>
+                        <div className="text-center">
+                          <div className="text-4xl mb-4">🏡</div>
+                          <h3 className="text-xl font-bold mb-2">Design Excellence</h3>
+                          <p className="text-gray-600">Thoughtful, functional designs that enhance living spaces</p>
+                        </div>
+                        <div className="text-center">
+                          <div className="text-4xl mb-4">🌿</div>
+                          <h3 className="text-xl font-bold mb-2">Eco-Build Focus</h3>
+                          <p className="text-gray-600">Sustainable materials and energy-efficient construction methods</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Services Page */}
+                {activeTab === 'services' && (
+                  <div className="space-y-12">
+                    <div className="text-center">
+                      <h1 className="text-4xl font-bold mb-4">Our Services</h1>
+                      <p className="text-xl text-gray-600">Quality craftsmanship for every project</p>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 gap-8">
+                      {[
+                        {
+                          title: "Fixing & Flipping",
+                          description: "We specialize in transforming distressed properties into beautiful, valuable homes. Our team handles everything from structural repairs to cosmetic updates, maximizing your property's potential.",
+                          icon: "🏠",
+                          features: ["Complete property assessment", "Structural repairs", "Cosmetic renovations", "Value optimization"]
+                        },
+                        {
+                          title: "Renovations",
+                          description: "Whether you need a kitchen update or a whole-house makeover, our renovation services combine quality craftsmanship with innovative design solutions tailored to your needs.",
+                          icon: "🔨",
+                          features: ["Kitchen & bathroom remodels", "Room additions", "Flooring & finishing", "Custom cabinetry"]
+                        },
+                        {
+                          title: "Eco-Builds",
+                          description: "Our sustainable construction approach uses eco-friendly materials and energy-efficient systems to create homes that are beautiful, healthy, and gentle on the environment.",
+                          icon: "🌿",
+                          features: ["Passive solar design", "Recycled materials", "Energy-efficient systems", "Water conservation"]
+                        },
+                        {
+                          title: "Custom Welding",
+                          description: "With over 20 years of welding expertise, we create custom metalwork solutions for both functional and artistic applications, from structural elements to decorative features.",
+                          icon: "🔥",
+                          features: ["Structural steelwork", "Decorative railings", "Custom furniture", "Artistic installations"]
+                        }
+                      ].map((service, index) => (
+                        <div key={index} className="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition-shadow">
+                          <div className="flex items-center mb-4">
+                            <div className="text-3xl mr-4">{service.icon}</div>
+                            <h2 className="text-2xl font-bold">{service.title}</h2>
+                          </div>
+                          <p className="text-gray-700 mb-6">{service.description}</p>
+                          <ul className="space-y-2">
+                            {service.features.map((feature, i) => (
+                              <li key={i} className="flex items-center">
+                                <span className="w-2 h-2 bg-blue-600 rounded-full mr-3"></span>
+                                {feature}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className="bg-blue-900 text-white rounded-xl p-8 text-center">
+                      <h2 className="text-2xl font-bold mb-4">Ready to Start Your Project?</h2>
+                      <p className="mb-6">Contact us today for a free consultation and quote</p>
+                      <button 
+                        onClick={() => setActiveTab('contact')}
+                        className="bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-3 px-8 rounded-lg transition-colors"
+                      >
+                        Get in Touch
+                      </button>
+                    </div>
+                  </div>
+                )}
+
+                {/* Gallery/Projects Page */}
+                {activeTab === 'gallery' && (
+                  <div className="space-y-12">
+                    <div className="text-center">
+                      <h1 className="text-4xl font-bold mb-4">Our Projects</h1>
+                      <p className="text-xl text-gray-600">Transformations that speak for themselves</p>
+                    </div>
+
+                    <div className="grid gap-12">
+                      {projects.map((project) => (
+                        <div key={project.id} className="bg-white rounded-xl shadow-lg overflow-hidden">
+                          <div className="p-8">
+                            <h2 className="text-2xl font-bold mb-4 text-center">{project.title}</h2>
+                            <div className="grid md:grid-cols-2 gap-8 mb-6">
+                              <div>
+                                <img src={project.before} alt="Before" className="rounded-lg w-full" />
+                                <p className="text-center mt-2 font-semibold text-gray-700">Before</p>
+                              </div>
+                              <div>
+                                <img src={project.after} alt="After" className="rounded-lg w-full" />
+                                <p className="text-center mt-2 font-semibold text-gray-700">After</p>
+                              </div>
+                            </div>
+                            <p className="text-gray-700 text-center text-lg">{project.description}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className="text-center">
+                      <button 
+                        onClick={() => setActiveTab('contact')}
+                        className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-lg text-lg transition-colors"
+                      >
+                        Start Your Transformation Today
+                      </button>
+                    </div>
+                  </div>
+                )}
+
+                {/* Reviews Page */}
+                {activeTab === 'reviews' && (
+                  <div className="space-y-12">
+                    <div className="text-center">
+                      <h1 className="text-4xl font-bold mb-4">Customer Reviews</h1>
+                      <p className="text-xl text-gray-600">What our clients say about us</p>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 gap-8">
+                      {/* Reviews List */}
+                      <div className="space-y-6">
+                        <h2 className="text-2xl font-bold mb-6">Recent Reviews</h2>
+                        {reviews.map((review) => (
+                          <div key={review.id} className="bg-white p-6 rounded-xl shadow-lg">
+                            <div className="flex justify-between items-start mb-4">
+                              <h3 className="text-xl font-bold">{review.name}</h3>
+                              <span className="text-gray-500 text-sm">{review.date}</span>
+                            </div>
+                            <div className="mb-4">
+                              {renderStars(review.rating)}
+                            </div>
+                            <p className="text-gray-700">{review.comment}</p>
+                          </div>
+                        ))}
+                      </div>
+
+                      {/* Add Review Form */}
+                      <div>
+                        <h2 className="text-2xl font-bold mb-6">Leave a Review</h2>
+                        <form onSubmit={handleSubmitReview} className="bg-white p-6 rounded-xl shadow-lg space-y-4">
+                          <div>
+                            <label className="block text-gray-700 font-bold mb-2" htmlFor="review-name">Your Name *</label>
+                            <input
+                              type="text"
+                              id="review-name"
+                              name="name"
+                              value={newReview.name}
+                              onChange={handleReviewChange}
+                              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                              required
+                            />
+                          </div>
+                          
+                          <div>
+                            <label className="block text-gray-700 font-bold mb-2">Rating *</label>
+                            <div className="flex space-x-2">
+                              {[1, 2, 3, 4, 5].map((star) => (
+                                <button
+                                  key={star}
+                                  type="button"
+                                  onClick={() => setNewReview({...newReview, rating: star})}
+                                  className="text-2xl focus:outline-none"
+                                >
+                                  <svg 
+                                    className={`w-8 h-8 ${star <= newReview.rating ? 'text-yellow-400' : 'text-gray-300'}`} 
+                                    fill="currentColor" 
+                                    viewBox="0 0 20 20"
+                                  >
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                  </svg>
+                                </button>
+                              ))}
+                            </div>
+                          </div>
+                          
+                          <div>
+                            <label className="block text-gray-700 font-bold mb-2" htmlFor="review-comment">Your Review *</label>
+                            <textarea
+                              id="review-comment"
+                              name="comment"
+                              value={newReview.comment}
+                              onChange={handleReviewChange}
+                              rows="4"
+                              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                              required
+                            ></textarea>
+                          </div>
+                          
+                          <button
+                            type="submit"
+                            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg transition-colors"
+                          >
+                            Submit Review
+                          </button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Contact Page */}
+                {activeTab === 'contact' && (
+                  <div className="space-y-12">
+                    <div className="text-center">
+                      <h1 className="text-4xl font-bold mb-4">Contact Us</h1>
+                      <p className="text-xl text-gray-600">Let's discuss your project</p>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 gap-12">
+                      <div>
+                        <h2 className="text-2xl font-bold mb-6">Get In Touch</h2>
+                        <div className="space-y-6">
+                          <div className="flex items-center">
+                            <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                              <span className="text-blue-600 text-xl">📞</span>
+                            </div>
+                            <div>
+                              <h3 className="font-bold">Phone</h3>
+                              <p className="text-gray-700">
+                                <a href={`tel:${contactInfo.phone.replace(/-/g, '')}`}>{contactInfo.phone}</a>
+                              </p>
+                            </div>
+                          </div>
+                          <div className="flex items-center">
+                            <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                              <span className="text-blue-600 text-xl">✉️</span>
+                            </div>
+                            <div>
+                              <h3 className="font-bold">Email</h3>
+                              <p className="text-gray-700">
+                                <a href={`mailto:${contactInfo.email}`}>{contactInfo.email}</a>
+                              </p>
+                            </div>
+                          </div>
+                          <div className="flex items-center">
+                            <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                              <span className="text-blue-600 text-xl">📍</span>
+                            </div>
+                            <div>
+                              <h3 className="font-bold">Address</h3>
+                              <p className="text-gray-700">{contactInfo.address}</p>
+                            </div>
+                          </div>
+                          <div className="flex items-center">
+                            <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                              <span className="text-blue-600 text-xl">🕒</span>
+                            </div>
+                            <div>
+                              <h3 className="font-bold">Hours</h3>
+                              {contactInfo.hours.map((hour, index) => (
+                                <p key={index} className="text-gray-700">{hour}</p>
+                              ))}
+                            </div>
+                          </div>
+                          
+                          {/* Social Media Links */}
+                          <div className="pt-4">
+                            <h3 className="font-bold text-lg mb-3">Follow Us</h3>
+                            <div className="flex space-x-4">
+                              <a 
+                                href={socialLinks.instagram} 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                className="w-12 h-12 bg-gradient-to-r from-purple-600 to-pink-500 rounded-full flex items-center justify-center text-white hover:opacity-80 transition-opacity"
+                              >
+                                <i className="fab fa-instagram text-xl"></i>
+                              </a>
+                              <a 
+                                href={socialLinks.youtube} 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                className="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center text-white hover:opacity-80 transition-opacity"
+                              >
+                                <i className="fab fa-youtube text-xl"></i>
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div>
+                        <h2 className="text-2xl font-bold mb-6">Send Us a Message</h2>
+                        <form onSubmit={handleSubmit} className="space-y-4">
+                          <div>
+                            <label className="block text-gray-700 font-bold mb-2" htmlFor="name">Name</label>
+                            <input
+                              type="text"
+                              id="name"
+                              name="name"
+                              value={contactForm.name}
+                              onChange={handleContactChange}
+                              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                              required
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-gray-700 font-bold mb-2" htmlFor="email">Email</label>
+                            <input
+                              type="email"
+                              id="email"
+                              name="email"
+                              value={contactForm.email}
+                              onChange={handleContactChange}
+                              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                              required
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-gray-700 font-bold mb-2" htmlFor="phone">Phone</label>
+                            <input
+                              type="tel"
+                              id="phone"
+                              name="phone"
+                              value={contactForm.phone}
+                              onChange={handleContactChange}
+                              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                              required
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-gray-700 font-bold mb-2" htmlFor="message">Message</label>
+                            <textarea
+                              id="message"
+                              name="message"
+                              value={contactForm.message}
+                              onChange={handleContactChange}
+                              rows="5"
+                              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                              required
+                            ></textarea>
+                          </div>
+                          <button
+                            type="submit"
+                            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg transition-colors"
+                          >
+                            Send Message
+                          </button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Sell Property Page */}
+                {activeTab === 'sell-property' && (
+                  <div className="space-y-12">
+                    <div className="text-center">
+                      <h1 className="text-4xl font-bold mb-4">Sell Your Distressed Property</h1>
+                      <p className="text-xl text-gray-600">We buy houses in any condition - no repairs needed!</p>
+                    </div>
+
+                    <div className="bg-gradient-to-r from-red-500 to-orange-500 text-white rounded-xl p-8 text-center mb-12">
+                      <h2 className="text-2xl font-bold mb-4">Why Sell to Us?</h2>
+                      <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+                        <div>
+                          <div className="text-3xl mb-2">💰</div>
+                          <h3 className="font-bold">Fair Cash Offers</h3>
+                          <p>Get a competitive offer without the hassle of traditional sales</p>
+                        </div>
+                        <div>
+                          <div className="text-3xl mb-2">⚡</div>
+                          <h3 className="font-bold">Fast Closing</h3>
+                          <p>Close in as little as 7 days - no waiting for bank approvals</p>
+                        </div>
+                        <div>
+                          <div className="text-3xl mb-2">🏠</div>
+                          <h3 className="font-bold">As-Is Condition</h3>
+                          <p>No need to make repairs or clean up - we buy properties in any condition</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="max-w-3xl mx-auto">
+                      <form onSubmit={handlePropertySubmit} className="space-y-6 bg-white p-8 rounded-xl shadow-lg">
+                        <h2 className="text-2xl font-bold text-center mb-6">Tell Us About Your Property</h2>
+                        
+                        <div className="grid md:grid-cols-2 gap-4">
+                          <div>
+                            <label className="block text-gray-700 font-bold mb-2" htmlFor="property-name">Your Name</label>
+                            <input
+                              type="text"
+                              id="property-name"
+                              name="name"
+                              value={propertyForm.name}
+                              onChange={handlePropertyChange}
+                              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                              required
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-gray-700 font-bold mb-2" htmlFor="property-email">Email</label>
+                            <input
+                              type="email"
+                              id="property-email"
+                              name="email"
+                              value={propertyForm.email}
+                              onChange={handlePropertyChange}
+                              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                              required
+                            />
+                          </div>
+                        </div>
+                        
+                        <div>
+                          <label className="block text-gray-700 font-bold mb-2" htmlFor="property-phone">Phone</label>
+                          <input
+                            type="tel"
+                            id="property-phone"
+                            name="phone"
+                            value={propertyForm.phone}
+                            onChange={handlePropertyChange}
+                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            required
+                          />
+                        </div>
+                        
+                        <div>
+                          <label className="block text-gray-700 font-bold mb-2" htmlFor="property-address">Property Address</label>
+                          <input
+                            type="text"
+                            id="property-address"
+                            name="address"
+                            value={propertyForm.address}
+                            onChange={handlePropertyChange}
+                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            required
+                          />
+                        </div>
+                        
+                        <div>
+                          <label className="block text-gray-700 font-bold mb-2" htmlFor="property-price">Asking Price (if any)</label>
+                          <input
+                            type="text"
+                            id="property-price"
+                            name="price"
+                            value={propertyForm.price}
+                            onChange={handlePropertyChange}
+                            placeholder="$0"
+                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          />
+                        </div>
+                        
+                        <div>
+                          <label className="block text-gray-700 font-bold mb-2" htmlFor="property-description">Property Description</label>
+                          <textarea
+                            id="property-description"
+                            name="description"
+                            value={propertyForm.description}
+                            onChange={handlePropertyChange}
+                            rows="4"
+                            placeholder="Tell us about the condition of your property, any needed repairs, and why you're selling."
+                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            required
+                          ></textarea>
+                        </div>
+                        
+                        {/* Multiple Photo Upload */}
+                        <div>
+                          <label className="block text-gray-700 font-bold mb-2" htmlFor="property-photos">Property Photos</label>
+                          <input
+                            type="file"
+                            id="property-photos"
+                            name="photos"
+                            accept="image/*"
+                            onChange={handlePropertyChange}
+                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            multiple
+                          />
+                          <p className="text-sm text-gray-500 mt-1">Upload multiple photos of your property (optional but helpful)</p>
+                          
+                          {/* Preview selected photos */}
+                          {propertyForm.photos.length > 0 && (
+                            <div className="mt-4">
+                              <p className="text-sm text-gray-600 mb-2">
+                                Selected {propertyForm.photos.length} photo(s):
+                              </p>
+                              <div className="grid grid-cols-3 gap-2">
+                                {Array.from(propertyForm.photos).map((file, index) => (
+                                  <div key={index} className="relative">
+                                    <div className="bg-gray-200 border-2 border-dashed rounded-xl w-full h-20 flex items-center justify-center">
+                                      <span className="text-xs text-gray-500 truncate px-1">{file.name}</span>
+                                    </div>
+                                    <span className="absolute top-0 right-0 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
+                                      {index + 1}
+                                    </span>
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                        
+                        <button
+                          type="submit"
+                          className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-4 rounded-lg text-lg transition-colors"
+                        >
+                          Submit Property Information
+                        </button>
+                      </form>
+                      
+                      <div className="mt-8 text-center">
+                        <p className="text-gray-600 mb-4">Prefer to talk directly?</p>
+                        <p className="text-lg font-bold">Call us at <a href={`tel:${contactInfo.phone.replace(/-/g, '')}`} className="text-blue-600">{contactInfo.phone}</a></p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </main>
+
+              {/* Footer */}
+              <footer className="bg-gray-900 text-white mt-16">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                  <div className="grid md:grid-cols-4 gap-8">
+                    <div>
+                      <div className="flex items-center mb-4">
+                        {/* Footer Logo - CUSTOMIZE THIS */}
+                        <div className="mr-3">
+                          {/* Option 1: Simple SVG Logo */}
+                          <svg className="h-8 w-8 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2L2 7v10c0 5.55 3.84 9.74 9 11 5.16-1.26 9-5.45 9-11V7l-10-5z"/>
+                          </svg>
+                          
+                          {/* Option 2: Text-based logo (uncomment to use) */}
+                          {/* <div className="text-yellow-500 font-bold text-lg">BH</div> */}
+                          
+                          {/* Option 3: Your custom logo (uncomment and replace with your image) */}
+                          {/* <img src="/path/to/your/logo.png" alt="Barakah Homes Logo" className="h-8 w-8" /> */}
+                        </div>
+                        <h3 className="text-xl font-bold">Barakah Homes</h3>
+                      </div>
+                      <p className="text-gray-400">
+                        Building with Purpose & Barakah since 2005. Sustainable, high-quality homes crafted with integrity and innovation.
+                      </p>
+                      
+                      {/* Social Media Links in Footer */}
+                      <div className="flex space-x-4 mt-6">
+                        <a 
+                          href={socialLinks.instagram} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="w-10 h-10 bg-gradient-to-r from-purple-600 to-pink-500 rounded-full flex items-center justify-center text-white hover:opacity-80 transition-opacity"
+                        >
+                          <i className="fab fa-instagram"></i>
+                        </a>
+                        <a 
+                          href={socialLinks.youtube} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="w-10 h-10 bg-red-600 rounded-full flex items-center justify-center text-white hover:opacity-80 transition-opacity"
+                        >
+                          <i className="fab fa-youtube"></i>
+                        </a>
+                      </div>
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-bold mb-4">Services</h3>
+                      <ul className="space-y-2 text-gray-400">
+                        <li>Fixing & Flipping</li>
+                        <li>Renovations</li>
+                        <li>Eco-Builds</li>
+                        <li>Custom Welding</li>
+                      </ul>
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-bold mb-4">Contact</h3>
+                      <ul className="space-y-2 text-gray-400">
+                        <li>📞 {contactInfo.phone}</li>
+                        <li>✉️ {contactInfo.email}</li>
+                        <li>📍 {contactInfo.address}</li>
+                      </ul>
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-bold mb-4">Quick Links</h3>
+                      <ul className="space-y-2">
+                        {['home', 'about', 'services', 'gallery', 'reviews', 'contact', 'sell-property'].map((tab) => (
+                          <li key={tab}>
+                            <button
+                              onClick={() => setActiveTab(tab)}
+                              className="text-gray-400 hover:text-white transition-colors capitalize"
+                            >
+                              {tab.replace('-', ' ')}
+                            </button>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                  <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                    <p>&copy; {new Date().getFullYear()} Barakah Homes. All rights reserved.</p>
+                  </div>
+                </div>
+              </footer>
+            </div>
+          );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
