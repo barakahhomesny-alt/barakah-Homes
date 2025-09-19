@@ -15,20 +15,9 @@
     <div id="root"></div>
     <script type="text/babel">
         const { useState } = React;
-
         const App = () => {
           const [activeTab, setActiveTab] = useState('home');
-          const [contactForm, setContactForm] = useState({ name: '', email: '', phone: '', message: '' });
-          const [propertyForm, setPropertyForm] = useState({ 
-            name: '', 
-            email: '', 
-            phone: '', 
-            address: '', 
-            description: '', 
-            price: '',
-            photos: []
-          });
-          
+          // Removed contactForm and propertyForm state as they are no longer needed for submission logic
           // Review state
           const [reviews, setReviews] = useState([
             {
@@ -53,13 +42,11 @@
               date: "2023-08-30"
             }
           ]);
-          
           const [newReview, setNewReview] = useState({
             name: '',
             rating: 5,
             comment: ''
           });
-
           // Updated contact information
           const contactInfo = {
             phone: "607-778-9262",
@@ -71,31 +58,19 @@
               "Sunday: Closed"
             ]
           };
-
           // Updated social media links
           const socialLinks = {
             instagram: "https://instagram.com/Barakah_Builds",
             youtube: "https://youtube.com/@technofix9585"
           };
 
-          const handleContactChange = (e) => {
-            setContactForm({ ...contactForm, [e.target.name]: e.target.value });
-          };
-
-          const handlePropertyChange = (e) => {
-            if (e.target.name === 'photos') {
-              const files = Array.from(e.target.files);
-              setPropertyForm({ ...propertyForm, photos: files });
-            } else {
-              setPropertyForm({ ...propertyForm, [e.target.name]: e.target.value });
-            }
-          };
+          // Removed handleContactChange, handlePropertyChange, handleSubmit, handlePropertySubmit
+          // as Formspree will now handle the form submissions.
 
           const handleReviewChange = (e) => {
             const { name, value } = e.target;
             setNewReview({ ...newReview, [name]: name === 'rating' ? parseInt(value) : value });
           };
-
           const handleSubmitReview = (e) => {
             e.preventDefault();
             if (newReview.name && newReview.comment) {
@@ -110,26 +85,6 @@
             } else {
               alert('Please fill in all required fields.');
             }
-          };
-
-          const handleSubmit = (e) => {
-            e.preventDefault();
-            alert('Thank you for your submission! We will contact you soon.');
-            setContactForm({ name: '', email: '', phone: '', message: '' });
-          };
-
-          const handlePropertySubmit = (e) => {
-            e.preventDefault();
-            alert('Thank you for submitting your property! We will review it and get back to you.');
-            setPropertyForm({ 
-              name: '', 
-              email: '', 
-              phone: '', 
-              address: '', 
-              description: '', 
-              price: '', 
-              photos: [] 
-            });
           };
 
           const projects = [
@@ -162,16 +117,15 @@
               description: "Hand-forged steel railing with artistic design elements"
             }
           ];
-
           // Function to render star ratings
           const renderStars = (rating) => {
             return (
               <div className="flex">
                 {[...Array(5)].map((_, i) => (
-                  <svg 
-                    key={i} 
-                    className={`w-5 h-5 ${i < rating ? 'text-yellow-400' : 'text-gray-300'}`} 
-                    fill="currentColor" 
+                  <svg
+                    key={i}
+                    className={`w-5 h-5 ${i < rating ? 'text-yellow-400' : 'text-gray-300'}`}
+                    fill="currentColor"
                     viewBox="0 0 20 20"
                   >
                     <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
@@ -180,7 +134,6 @@
               </div>
             );
           };
-
           return (
             <div className="min-h-screen bg-gray-50">
               {/* Navigation */}
@@ -194,10 +147,8 @@
                         <svg className="h-10 w-10 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
                           <path d="M12 2L2 7v10c0 5.55 3.84 9.74 9 11 5.16-1.26 9-5.45 9-11V7l-10-5z"/>
                         </svg>
-                        
                         {/* Option 2: Text-based logo (uncomment to use) */}
                         {/* <div className="text-yellow-500 font-bold text-xl">BH</div> */}
-                        
                         {/* Option 3: Your custom logo (uncomment and replace with your image) */}
                         {/* <img src="/path/to/your/logo.png" alt="Barakah Homes Logo" className="h-10 w-10" /> */}
                       </div>
@@ -221,8 +172,8 @@
                       </div>
                     </div>
                     <div className="md:hidden">
-                      <select 
-                        value={activeTab} 
+                      <select
+                        value={activeTab}
                         onChange={(e) => setActiveTab(e.target.value)}
                         className="bg-gray-700 text-white rounded-md py-2 px-3"
                       >
@@ -236,7 +187,6 @@
                   </div>
                 </div>
               </nav>
-
               {/* Main Content */}
               <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
                 {/* Home Page */}
@@ -253,7 +203,7 @@
                           <p className="text-xl md:text-2xl text-blue-100 mb-8 max-w-3xl mx-auto">
                             Sustainable, high-quality homes crafted with integrity, innovation, and decades of welding expertise.
                           </p>
-                          <button 
+                          <button
                             onClick={() => setActiveTab('contact')}
                             className="bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-4 px-8 rounded-full text-lg transition-transform transform hover:scale-105 shadow-lg"
                           >
@@ -265,7 +215,6 @@
                         <img src="https://placehold.co/800x600/4ade80/fff?text=Welding+Art" alt="Welding Art" className="object-cover" />
                       </div>
                     </section>
-
                     {/* Services Preview */}
                     <section className="py-12">
                       <h2 className="text-3xl font-bold text-center mb-12">Our Services</h2>
@@ -284,7 +233,6 @@
                         ))}
                       </div>
                     </section>
-
                     {/* Featured Project */}
                     <section className="py-12 bg-gray-100 rounded-2xl">
                       <div className="text-center mb-12">
@@ -303,7 +251,7 @@
                       </div>
                       <div className="mt-8 text-center">
                         <p className="text-lg text-gray-700 max-w-2xl mx-auto">{projects[0].description}</p>
-                        <button 
+                        <button
                           onClick={() => setActiveTab('gallery')}
                           className="mt-6 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-colors"
                         >
@@ -313,7 +261,6 @@
                     </section>
                   </div>
                 )}
-
                 {/* About Us Page */}
                 {activeTab === 'about' && (
                   <div className="space-y-12">
@@ -323,7 +270,6 @@
                         Building with Purpose & Barakah since 2005
                       </p>
                     </div>
-
                     <div className="grid md:grid-cols-2 gap-12 items-center">
                       <div>
                         <img src="https://placehold.co/600x400/3b82f6/fff?text=Our+Team" alt="Our Team" className="rounded-lg shadow-lg" />
@@ -331,13 +277,13 @@
                       <div>
                         <h2 className="text-2xl font-bold mb-4">Our Story</h2>
                         <p className="text-gray-700 mb-4">
-                          Founded by master welder and eco-builder Azad Hussein, Barakah Homes began as a small workshop 
-                          specializing in custom metalwork. With over 20 years of experience in welding and design, 
+                          Founded by master welder and eco-builder Azad Hussein, Barakah Homes began as a small workshop
+                          specializing in custom metalwork. With over 20 years of experience in welding and design,
                           we've expanded our expertise to include complete home renovations and sustainable construction.
                         </p>
                         <p className="text-gray-700 mb-4">
-                          Our passion for craftsmanship and environmental responsibility drives everything we do. 
-                          We believe in creating spaces that not only look beautiful but also contribute positively 
+                          Our passion for craftsmanship and environmental responsibility drives everything we do.
+                          We believe in creating spaces that not only look beautiful but also contribute positively
                           to our community and planet.
                         </p>
                         <div className="bg-blue-50 p-6 rounded-lg">
@@ -350,7 +296,6 @@
                         </div>
                       </div>
                     </div>
-
                     <div className="bg-gray-100 rounded-xl p-8">
                       <h2 className="text-2xl font-bold mb-6 text-center">Our Expertise</h2>
                       <div className="grid md:grid-cols-3 gap-8">
@@ -373,7 +318,6 @@
                     </div>
                   </div>
                 )}
-
                 {/* Services Page */}
                 {activeTab === 'services' && (
                   <div className="space-y-12">
@@ -381,7 +325,6 @@
                       <h1 className="text-4xl font-bold mb-4">Our Services</h1>
                       <p className="text-xl text-gray-600">Quality craftsmanship for every project</p>
                     </div>
-
                     <div className="grid md:grid-cols-2 gap-8">
                       {[
                         {
@@ -426,11 +369,10 @@
                         </div>
                       ))}
                     </div>
-
                     <div className="bg-blue-900 text-white rounded-xl p-8 text-center">
                       <h2 className="text-2xl font-bold mb-4">Ready to Start Your Project?</h2>
                       <p className="mb-6">Contact us today for a free consultation and quote</p>
-                      <button 
+                      <button
                         onClick={() => setActiveTab('contact')}
                         className="bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-3 px-8 rounded-lg transition-colors"
                       >
@@ -439,7 +381,6 @@
                     </div>
                   </div>
                 )}
-
                 {/* Gallery/Projects Page */}
                 {activeTab === 'gallery' && (
                   <div className="space-y-12">
@@ -447,7 +388,6 @@
                       <h1 className="text-4xl font-bold mb-4">Our Projects</h1>
                       <p className="text-xl text-gray-600">Transformations that speak for themselves</p>
                     </div>
-
                     <div className="grid gap-12">
                       {projects.map((project) => (
                         <div key={project.id} className="bg-white rounded-xl shadow-lg overflow-hidden">
@@ -468,9 +408,8 @@
                         </div>
                       ))}
                     </div>
-
                     <div className="text-center">
-                      <button 
+                      <button
                         onClick={() => setActiveTab('contact')}
                         className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-lg text-lg transition-colors"
                       >
@@ -479,7 +418,6 @@
                     </div>
                   </div>
                 )}
-
                 {/* Reviews Page */}
                 {activeTab === 'reviews' && (
                   <div className="space-y-12">
@@ -487,7 +425,6 @@
                       <h1 className="text-4xl font-bold mb-4">Customer Reviews</h1>
                       <p className="text-xl text-gray-600">What our clients say about us</p>
                     </div>
-
                     <div className="grid md:grid-cols-2 gap-8">
                       {/* Reviews List */}
                       <div className="space-y-6">
@@ -505,7 +442,6 @@
                           </div>
                         ))}
                       </div>
-
                       {/* Add Review Form */}
                       <div>
                         <h2 className="text-2xl font-bold mb-6">Leave a Review</h2>
@@ -522,7 +458,6 @@
                               required
                             />
                           </div>
-                          
                           <div>
                             <label className="block text-gray-700 font-bold mb-2">Rating *</label>
                             <div className="flex space-x-2">
@@ -533,9 +468,9 @@
                                   onClick={() => setNewReview({...newReview, rating: star})}
                                   className="text-2xl focus:outline-none"
                                 >
-                                  <svg 
-                                    className={`w-8 h-8 ${star <= newReview.rating ? 'text-yellow-400' : 'text-gray-300'}`} 
-                                    fill="currentColor" 
+                                  <svg
+                                    className={`w-8 h-8 ${star <= newReview.rating ? 'text-yellow-400' : 'text-gray-300'}`}
+                                    fill="currentColor"
                                     viewBox="0 0 20 20"
                                   >
                                     <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
@@ -544,7 +479,6 @@
                               ))}
                             </div>
                           </div>
-                          
                           <div>
                             <label className="block text-gray-700 font-bold mb-2" htmlFor="review-comment">Your Review *</label>
                             <textarea
@@ -557,7 +491,6 @@
                               required
                             ></textarea>
                           </div>
-                          
                           <button
                             type="submit"
                             className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg transition-colors"
@@ -569,7 +502,6 @@
                     </div>
                   </div>
                 )}
-
                 {/* Contact Page */}
                 {activeTab === 'contact' && (
                   <div className="space-y-12">
@@ -577,7 +509,6 @@
                       <h1 className="text-4xl font-bold mb-4">Contact Us</h1>
                       <p className="text-xl text-gray-600">Let's discuss your project</p>
                     </div>
-
                     <div className="grid md:grid-cols-2 gap-12">
                       <div>
                         <h2 className="text-2xl font-bold mb-6">Get In Touch</h2>
@@ -624,22 +555,21 @@
                               ))}
                             </div>
                           </div>
-                          
                           {/* Social Media Links */}
                           <div className="pt-4">
                             <h3 className="font-bold text-lg mb-3">Follow Us</h3>
                             <div className="flex space-x-4">
-                              <a 
-                                href={socialLinks.instagram} 
-                                target="_blank" 
+                              <a
+                                href={socialLinks.instagram}
+                                target="_blank"
                                 rel="noopener noreferrer"
                                 className="w-12 h-12 bg-gradient-to-r from-purple-600 to-pink-500 rounded-full flex items-center justify-center text-white hover:opacity-80 transition-opacity"
                               >
                                 <i className="fab fa-instagram text-xl"></i>
                               </a>
-                              <a 
-                                href={socialLinks.youtube} 
-                                target="_blank" 
+                              <a
+                                href={socialLinks.youtube}
+                                target="_blank"
                                 rel="noopener noreferrer"
                                 className="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center text-white hover:opacity-80 transition-opacity"
                               >
@@ -649,18 +579,16 @@
                           </div>
                         </div>
                       </div>
-
                       <div>
                         <h2 className="text-2xl font-bold mb-6">Send Us a Message</h2>
-                        <form onSubmit={handleSubmit} className="space-y-4">
+                        {/* START OF UPDATED CONTACT FORM */}
+                        <form action="https://formspree.io/f/movngwqw" method="POST" className="space-y-4">
                           <div>
                             <label className="block text-gray-700 font-bold mb-2" htmlFor="name">Name</label>
                             <input
                               type="text"
                               id="name"
                               name="name"
-                              value={contactForm.name}
-                              onChange={handleContactChange}
                               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                               required
                             />
@@ -671,8 +599,6 @@
                               type="email"
                               id="email"
                               name="email"
-                              value={contactForm.email}
-                              onChange={handleContactChange}
                               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                               required
                             />
@@ -683,8 +609,6 @@
                               type="tel"
                               id="phone"
                               name="phone"
-                              value={contactForm.phone}
-                              onChange={handleContactChange}
                               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                               required
                             />
@@ -694,8 +618,6 @@
                             <textarea
                               id="message"
                               name="message"
-                              value={contactForm.message}
-                              onChange={handleContactChange}
                               rows="5"
                               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                               required
@@ -708,11 +630,11 @@
                             Send Message
                           </button>
                         </form>
+                        {/* END OF UPDATED CONTACT FORM */}
                       </div>
                     </div>
                   </div>
                 )}
-
                 {/* Sell Property Page */}
                 {activeTab === 'sell-property' && (
                   <div className="space-y-12">
@@ -720,7 +642,6 @@
                       <h1 className="text-4xl font-bold mb-4">Sell Your Distressed Property</h1>
                       <p className="text-xl text-gray-600">We buy houses in any condition - no repairs needed!</p>
                     </div>
-
                     <div className="bg-gradient-to-r from-red-500 to-orange-500 text-white rounded-xl p-8 text-center mb-12">
                       <h2 className="text-2xl font-bold mb-4">Why Sell to Us?</h2>
                       <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
@@ -741,135 +662,105 @@
                         </div>
                       </div>
                     </div>
-
                     <div className="max-w-3xl mx-auto">
-                      <form onSubmit={handlePropertySubmit} className="space-y-6 bg-white p-8 rounded-xl shadow-lg">
-                        <h2 className="text-2xl font-bold text-center mb-6">Tell Us About Your Property</h2>
-                        
-                        <div className="grid md:grid-cols-2 gap-4">
+                        {/* START OF UPDATED PROPERTY FORM */}
+                        <form
+                          action="https://formspree.io/f/mpwjvrwj"
+                          method="POST"
+                          encType="multipart/form-data"
+                          className="space-y-6 bg-white p-8 rounded-xl shadow-lg"
+                        >
+                          <h2 className="text-2xl font-bold text-center mb-6">Tell Us About Your Property</h2>
+
+                          <div className="grid md:grid-cols-2 gap-4">
+                            <div>
+                              <label className="block text-gray-700 font-bold mb-2" htmlFor="property-name">Your Name</label>
+                              <input
+                                type="text"
+                                id="property-name"
+                                name="name"
+                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                required
+                              />
+                            </div>
+                            <div>
+                              <label className="block text-gray-700 font-bold mb-2" htmlFor="property-email">Email</label>
+                              <input
+                                type="email"
+                                id="property-email"
+                                name="email"
+                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                required
+                              />
+                            </div>
+                          </div>
+
                           <div>
-                            <label className="block text-gray-700 font-bold mb-2" htmlFor="property-name">Your Name</label>
+                            <label className="block text-gray-700 font-bold mb-2" htmlFor="property-phone">Phone</label>
+                            <input
+                              type="tel"
+                              id="property-phone"
+                              name="phone"
+                              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                              required
+                            />
+                          </div>
+
+                          <div>
+                            <label className="block text-gray-700 font-bold mb-2" htmlFor="property-address">Property Address</label>
                             <input
                               type="text"
-                              id="property-name"
-                              name="name"
-                              value={propertyForm.name}
-                              onChange={handlePropertyChange}
+                              id="property-address"
+                              name="address"
                               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                               required
                             />
                           </div>
+
                           <div>
-                            <label className="block text-gray-700 font-bold mb-2" htmlFor="property-email">Email</label>
+                            <label className="block text-gray-700 font-bold mb-2" htmlFor="property-price">Asking Price (if any)</label>
                             <input
-                              type="email"
-                              id="property-email"
-                              name="email"
-                              value={propertyForm.email}
-                              onChange={handlePropertyChange}
+                              type="text"
+                              id="property-price"
+                              name="price"
+                              placeholder="$0"
                               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                              required
                             />
                           </div>
-                        </div>
-                        
-                        <div>
-                          <label className="block text-gray-700 font-bold mb-2" htmlFor="property-phone">Phone</label>
-                          <input
-                            type="tel"
-                            id="property-phone"
-                            name="phone"
-                            value={propertyForm.phone}
-                            onChange={handlePropertyChange}
-                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            required
-                          />
-                        </div>
-                        
-                        <div>
-                          <label className="block text-gray-700 font-bold mb-2" htmlFor="property-address">Property Address</label>
-                          <input
-                            type="text"
-                            id="property-address"
-                            name="address"
-                            value={propertyForm.address}
-                            onChange={handlePropertyChange}
-                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            required
-                          />
-                        </div>
-                        
-                        <div>
-                          <label className="block text-gray-700 font-bold mb-2" htmlFor="property-price">Asking Price (if any)</label>
-                          <input
-                            type="text"
-                            id="property-price"
-                            name="price"
-                            value={propertyForm.price}
-                            onChange={handlePropertyChange}
-                            placeholder="$0"
-                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                          />
-                        </div>
-                        
-                        <div>
-                          <label className="block text-gray-700 font-bold mb-2" htmlFor="property-description">Property Description</label>
-                          <textarea
-                            id="property-description"
-                            name="description"
-                            value={propertyForm.description}
-                            onChange={handlePropertyChange}
-                            rows="4"
-                            placeholder="Tell us about the condition of your property, any needed repairs, and why you're selling."
-                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            required
-                          ></textarea>
-                        </div>
-                        
-                        {/* Multiple Photo Upload */}
-                        <div>
-                          <label className="block text-gray-700 font-bold mb-2" htmlFor="property-photos">Property Photos</label>
-                          <input
-                            type="file"
-                            id="property-photos"
-                            name="photos"
-                            accept="image/*"
-                            onChange={handlePropertyChange}
-                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            multiple
-                          />
-                          <p className="text-sm text-gray-500 mt-1">Upload multiple photos of your property (optional but helpful)</p>
-                          
-                          {/* Preview selected photos */}
-                          {propertyForm.photos.length > 0 && (
-                            <div className="mt-4">
-                              <p className="text-sm text-gray-600 mb-2">
-                                Selected {propertyForm.photos.length} photo(s):
-                              </p>
-                              <div className="grid grid-cols-3 gap-2">
-                                {Array.from(propertyForm.photos).map((file, index) => (
-                                  <div key={index} className="relative">
-                                    <div className="bg-gray-200 border-2 border-dashed rounded-xl w-full h-20 flex items-center justify-center">
-                                      <span className="text-xs text-gray-500 truncate px-1">{file.name}</span>
-                                    </div>
-                                    <span className="absolute top-0 right-0 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
-                                      {index + 1}
-                                    </span>
-                                  </div>
-                                ))}
-                              </div>
-                            </div>
-                          )}
-                        </div>
-                        
-                        <button
-                          type="submit"
-                          className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-4 rounded-lg text-lg transition-colors"
-                        >
-                          Submit Property Information
-                        </button>
-                      </form>
-                      
+
+                          <div>
+                            <label className="block text-gray-700 font-bold mb-2" htmlFor="property-description">Property Description</label>
+                            <textarea
+                              id="property-description"
+                              name="description"
+                              rows="4"
+                              placeholder="Tell us about the condition of your property, any needed repairs, and why you're selling."
+                              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                              required
+                            ></textarea>
+                          </div>
+
+                          <div>
+                            <label className="block text-gray-700 font-bold mb-2" htmlFor="property-photos">Property Photos</label>
+                            <input
+                              type="file"
+                              id="property-photos"
+                              name="photos"
+                              accept="image/*"
+                              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                              multiple
+                            />
+                            <p className="text-sm text-gray-500 mt-1">Upload multiple photos of your property (optional but helpful)</p>
+                          </div>
+
+                          <button
+                            type="submit"
+                            className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-4 rounded-lg text-lg transition-colors"
+                          >
+                            Submit Property Information
+                          </button>
+                        </form>
+                        {/* END OF UPDATED PROPERTY FORM */}
                       <div className="mt-8 text-center">
                         <p className="text-gray-600 mb-4">Prefer to talk directly?</p>
                         <p className="text-lg font-bold">Call us at <a href={`tel:${contactInfo.phone.replace(/-/g, '')}`} className="text-blue-600">{contactInfo.phone}</a></p>
@@ -878,7 +769,6 @@
                   </div>
                 )}
               </main>
-
               {/* Footer */}
               <footer className="bg-gray-900 text-white mt-16">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -891,10 +781,8 @@
                           <svg className="h-8 w-8 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M12 2L2 7v10c0 5.55 3.84 9.74 9 11 5.16-1.26 9-5.45 9-11V7l-10-5z"/>
                           </svg>
-                          
                           {/* Option 2: Text-based logo (uncomment to use) */}
                           {/* <div className="text-yellow-500 font-bold text-lg">BH</div> */}
-                          
                           {/* Option 3: Your custom logo (uncomment and replace with your image) */}
                           {/* <img src="/path/to/your/logo.png" alt="Barakah Homes Logo" className="h-8 w-8" /> */}
                         </div>
@@ -903,20 +791,19 @@
                       <p className="text-gray-400">
                         Building with Purpose & Barakah since 2005. Sustainable, high-quality homes crafted with integrity and innovation.
                       </p>
-                      
                       {/* Social Media Links in Footer */}
                       <div className="flex space-x-4 mt-6">
-                        <a 
-                          href={socialLinks.instagram} 
-                          target="_blank" 
+                        <a
+                          href={socialLinks.instagram}
+                          target="_blank"
                           rel="noopener noreferrer"
                           className="w-10 h-10 bg-gradient-to-r from-purple-600 to-pink-500 rounded-full flex items-center justify-center text-white hover:opacity-80 transition-opacity"
                         >
                           <i className="fab fa-instagram"></i>
                         </a>
-                        <a 
-                          href={socialLinks.youtube} 
-                          target="_blank" 
+                        <a
+                          href={socialLinks.youtube}
+                          target="_blank"
                           rel="noopener noreferrer"
                           className="w-10 h-10 bg-red-600 rounded-full flex items-center justify-center text-white hover:opacity-80 transition-opacity"
                         >
@@ -965,7 +852,6 @@
             </div>
           );
         };
-
         const root = ReactDOM.createRoot(document.getElementById('root'));
         root.render(<App />);
     </script>
