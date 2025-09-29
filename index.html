@@ -63,10 +63,8 @@
             instagram: "https://instagram.com/Barakah_Builds",
             youtube: "https://youtube.com/@technofix9585"
           };
-
           // Removed handleContactChange, handlePropertyChange, handleSubmit, handlePropertySubmit
           // as Formspree will now handle the form submissions.
-
           const handleReviewChange = (e) => {
             const { name, value } = e.target;
             setNewReview({ ...newReview, [name]: name === 'rating' ? parseInt(value) : value });
@@ -86,7 +84,6 @@
               alert('Please fill in all required fields.');
             }
           };
-
           const projects = [
             {
               id: 1,
@@ -109,7 +106,6 @@
               after: "https://i.imgur.com/SvPHtjy.png",
               description: "Designed and built a 400 sq ft off-grid tiny home using sustainable materials like reclaimed wood and bamboo flooring. Features include a composting toilet, solar panel array for energy independence, and a rainwater collection system. The compact design maximizes space efficiency and minimizes environmental impact."
             },
-              
            {
            id: 4,
            title: "Custom Metalwork Installation",
@@ -135,6 +131,12 @@
               </div>
             );
           };
+
+          // Function to handle logo click (navigate to home)
+          const handleLogoClick = () => {
+            setActiveTab('home');
+          };
+
           return (
             <div className="min-h-screen bg-gray-50">
               {/* Navigation */}
@@ -145,15 +147,25 @@
                       {/* Company Logo - CUSTOMIZE THIS */}
                       <div className="mr-3">
                         {/* Option 1: Simple SVG Logo */}
-                        <svg className="h-10 w-10 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
+                        {/* <svg className="h-10 w-10 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
                           <path d="M12 2L2 7v10c0 5.55 3.84 9.74 9 11 5.16-1.26 9-5.45 9-11V7l-10-5z"/>
-                        </svg>
+                        </svg> */}
                         {/* Option 2: Text-based logo (uncomment to use) */}
                         {/* <div className="text-yellow-500 font-bold text-xl">BH</div> */}
-                        {/* Option 3: Your custom logo (uncomment and replace with your image) */}
-                        {/* <img src="/path/to/your/logo.png" alt="Barakah Homes Logo" className="h-10 w-10" /> */}
+                        {/* Option 3: Your custom logo (REPLACE WITH YOUR LOGO PATH) */}
+                        <img
+                          onClick={handleLogoClick}
+                          src="https://i.imgur.com/emDMoIt.png" // <<<<<<<<<<<<< CHANGE THIS PATH TO YOUR LOGO
+                          alt="Barakah Homes Logo"
+                          className="h-10 w-10 cursor-pointer" // Added cursor-pointer for visual cue
+                        />
                       </div>
-                      <h1 className="text-2xl font-bold">Barakah Homes</h1>
+                      <h1
+                        onClick={handleLogoClick}
+                        className="text-2xl font-bold cursor-pointer" // Added cursor-pointer for visual cue
+                      >
+                        Barakah Homes
+                      </h1>
                     </div>
                     <div className="hidden md:block">
                       <div className="ml-10 flex items-baseline space-x-4">
@@ -195,8 +207,8 @@
                   <div className="space-y-16">
                     {/* Hero Section */}
                     <section className="relative bg-gradient-to-r from-blue-900 to-green-800 rounded-2xl overflow-hidden">
-                      <div className="absolute inset-0 bg-black opacity-30"></div>
-                      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+                      {/* Removed the Welding Art image overlay */}
+                      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
                         <div className="text-center">
                           <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
                             Building with Purpose & Barakah
@@ -204,16 +216,21 @@
                           <p className="text-xl md:text-2xl text-blue-100 mb-8 max-w-3xl mx-auto">
                             Sustainable, high-quality homes crafted with integrity, innovation, and decades of welding expertise.
                           </p>
-                          <button
-                            onClick={() => setActiveTab('contact')}
-                            className="bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-4 px-8 rounded-full text-lg transition-transform transform hover:scale-105 shadow-lg"
-                          >
-                            Get a Free Quote
-                          </button>
+                          <div className="flex justify-center space-x-4">
+                            <button
+                              onClick={() => setActiveTab('contact')}
+                              className="bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-4 px-8 rounded-full text-lg transition-transform transform hover:scale-105 shadow-lg"
+                            >
+                              Get a Free Quote
+                            </button>
+                            <button
+                              onClick={() => setActiveTab('sell-property')}
+                              className="bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-8 rounded-full text-lg transition-transform transform hover:scale-105 shadow-lg"
+                            >
+                              Sell Your Property
+                            </button>
+                          </div>
                         </div>
-                      </div>
-                      <div className="absolute bottom-0 right-0 w-1/2 h-1/2 opacity-20">
-                        <img src="https://placehold.co/800x600/4ade80/fff?text=Welding+Art" alt="Welding Art" className="object-cover" />
                       </div>
                     </section>
                     {/* Services Preview */}
@@ -672,7 +689,6 @@
                           className="space-y-6 bg-white p-8 rounded-xl shadow-lg"
                         >
                           <h2 className="text-2xl font-bold text-center mb-6">Tell Us About Your Property</h2>
-
                           <div className="grid md:grid-cols-2 gap-4">
                             <div>
                               <label className="block text-gray-700 font-bold mb-2" htmlFor="property-name">Your Name</label>
@@ -695,7 +711,6 @@
                               />
                             </div>
                           </div>
-
                           <div>
                             <label className="block text-gray-700 font-bold mb-2" htmlFor="property-phone">Phone</label>
                             <input
@@ -706,7 +721,6 @@
                               required
                             />
                           </div>
-
                           <div>
                             <label className="block text-gray-700 font-bold mb-2" htmlFor="property-address">Property Address</label>
                             <input
@@ -717,7 +731,6 @@
                               required
                             />
                           </div>
-
                           <div>
                             <label className="block text-gray-700 font-bold mb-2" htmlFor="property-price">Asking Price (if any)</label>
                             <input
@@ -728,7 +741,6 @@
                               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                             />
                           </div>
-
                           <div>
                             <label className="block text-gray-700 font-bold mb-2" htmlFor="property-description">Property Description</label>
                             <textarea
@@ -740,7 +752,6 @@
                               required
                             ></textarea>
                           </div>
-
                           <div>
                             <label className="block text-gray-700 font-bold mb-2" htmlFor="property-photos">Property Photos</label>
                             <input
@@ -753,7 +764,6 @@
                             />
                             <p className="text-sm text-gray-500 mt-1">Upload multiple photos of your property (optional but helpful)</p>
                           </div>
-
                           <button
                             type="submit"
                             className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-4 rounded-lg text-lg transition-colors"
@@ -779,15 +789,25 @@
                         {/* Footer Logo - CUSTOMIZE THIS */}
                         <div className="mr-3">
                           {/* Option 1: Simple SVG Logo */}
-                          <svg className="h-8 w-8 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
+                          {/* <svg className="h-8 w-8 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M12 2L2 7v10c0 5.55 3.84 9.74 9 11 5.16-1.26 9-5.45 9-11V7l-10-5z"/>
-                          </svg>
+                          </svg> */}
                           {/* Option 2: Text-based logo (uncomment to use) */}
                           {/* <div className="text-yellow-500 font-bold text-lg">BH</div> */}
-                          {/* Option 3: Your custom logo (uncomment and replace with your image) */}
-                          {/* <img src="/path/to/your/logo.png" alt="Barakah Homes Logo" className="h-8 w-8" /> */}
+                          {/* Option 3: Your custom logo (REPLACE WITH YOUR LOGO PATH) */}
+                          <img
+                            onClick={handleLogoClick}
+                            src="./path/to/your/logo.png" // <<<<<<<<<<<<< CHANGE THIS PATH TO YOUR LOGO
+                            alt="Barakah Homes Logo"
+                            className="h-8 w-8 cursor-pointer" // Added cursor-pointer for visual cue
+                          />
                         </div>
-                        <h3 className="text-xl font-bold">Barakah Homes</h3>
+                        <h3
+                          onClick={handleLogoClick}
+                          className="text-xl font-bold cursor-pointer" // Added cursor-pointer for visual cue
+                        >
+                          Barakah Homes
+                        </h3>
                       </div>
                       <p className="text-gray-400">
                         Building with Purpose & Barakah since 2005. Sustainable, high-quality homes crafted with integrity and innovation.
@@ -835,7 +855,7 @@
                         {['home', 'about', 'services', 'gallery', 'reviews', 'contact', 'sell-property'].map((tab) => (
                           <li key={tab}>
                             <button
-                              onClick={() => setActiveTab(tab)}
+                              onClick={() => setActiveTab(tab)} // Changed from setActiveTab to navigate
                               className="text-gray-400 hover:text-white transition-colors capitalize"
                             >
                               {tab.replace('-', ' ')}
