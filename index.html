@@ -88,29 +88,29 @@
             {
               id: 1,
               title: "Historic Home Restoration",
-              before: "https://i.imgur.com/SFzHkpL.jpeg",
-              after: "https://i.imgur.com/KQZySwN.jpeg",
+              before: "https://i.imgur.com/J4aKFZl.jpeg",
+              after: "https://i.imgur.com/zTlmZm3.jpeg",
               description: "A meticulous restoration of a 1905 Victorian home, preserving original architectural details like ornate trim and bay windows while upgrading the electrical, plumbing, and HVAC systems. The project included refinishing original hardwood floors and installing period-appropriate lighting fixtures, breathing new life into a historic landmark."
             },
             {
               id: 2,
               title: "Modern Kitchen Renovation",
-              before: "https://i.imgur.com/DlhUQoM.png",
-              after: "https://i.imgur.com/AqOpKc8.png",
+              before: "https://i.imgur.com/OPiZBU6.png",
+              after: "https://i.imgur.com/rZicTEU.png",
               description: "Transformed a cramped, outdated 1980s kitchen into a spacious, light-filled culinary haven. We installed custom shaker-style cabinets with soft-close hinges, upgraded to energy-efficient stainless steel appliances, added a large granite island with seating, and incorporated LED under-cabinet lighting for a contemporary feel."
             },
             {
               id: 3,
               title: "Eco-Build Tiny Home",
-              before: "https://i.imgur.com/H9TjHT9.png",
-              after: "https://i.imgur.com/SvPHtjy.png",
+              before: "https://i.imgur.com/U8wHROl.png",
+              after: "https://i.imgur.com/ZOxgcvk.png",
               description: "Designed and built a 400 sq ft off-grid tiny home using sustainable materials like reclaimed wood and bamboo flooring. Features include a composting toilet, solar panel array for energy independence, and a rainwater collection system. The compact design maximizes space efficiency and minimizes environmental impact."
             },
            {
            id: 4,
            title: "Custom Metalwork Installation",
-             before: "https://i.postimg.cc/0jnkYybq/IMG-1540-imresizer.jpg",
-             after: "https://i.postimg.cc/Y0M2LW23/IMG-1546-imresizer.jpg",
+             before: "https://i.imgur.com/VCZLlQy.jpeg",
+             after: "https://i.imgur.com/FO5L9Bx.jpeg",
             description: "Fabricated and installed a unique, hand-welded steel railing for a modern spiral staircase. The design features clean lines and geometric patterns, complementing the home's contemporary aesthetic. The railing was powder-coated for durability and finished with a smooth touch."
             }
           ];
@@ -153,7 +153,7 @@
                         {/* Option 3: Your custom logo (REPLACE WITH YOUR LOGO PATH) */}
                         <img
                           onClick={handleLogoClick}
-                          src="https://i.imgur.com/kNE47qb.png" // <<<<<<<<<<<<< CHANGE THIS PATH TO YOUR LOGO
+                          src="https://i.imgur.com/Ff2o0G0.png" // <<<<<<<<<<<<< CHANGE THIS PATH TO YOUR LOGO
                           alt="Barakah Homes Logo"
                           className="h-10 w-14 cursor-pointer" // Added cursor-pointer for visual cue
                         />
@@ -205,11 +205,18 @@
                   <div className="space-y-16">
                     {/* Hero Section */}
                     <section className="relative bg-gradient-to-r from-blue-900 to-green-800 rounded-2xl overflow-hidden shadow-xl">
-                      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+                      {/* Professional Background Image */}
+                      <div className="absolute inset-0 bg-cover bg-center" style={{backgroundImage: "https://i.imgur.com/6J5BgiQ.jpeg')"}}>
+                        <div className="absolute inset-0 bg-black bg-opacity-50"></div> {/* Overlay for text readability */}
+                      </div>
+                      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
                         <div className="text-center">
-                          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-                            Building with Purpose & Barakah
+                          <h1 className="text-4xl md:text-6xl font-bold text-white mb-2">
+                            Barakah Homes LLC
                           </h1>
+                          <p className="text-xl md:text-2xl text-blue-100 mb-8 max-w-3xl mx-auto">
+                            Eco-Friendly Renovations & Custom Builds in Endicott
+                          </p>
                           <p className="text-xl md:text-2xl text-blue-100 mb-8 max-w-3xl mx-auto">
                             Expertly fixing homes & buying distressed properties. Transforming spaces for families and investors.
                           </p>
@@ -218,7 +225,7 @@
                               onClick={() => setActiveTab('contact')}
                               className="bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-4 px-8 rounded-full text-lg transition-transform transform hover:scale-105 shadow-lg"
                             >
-                              Get a Free Quote
+                              Get Your Free Estimate
                             </button>
                             <button
                               onClick={() => setActiveTab('sell-property')}
@@ -275,7 +282,7 @@
                     {/* Featured Project */}
                     <section className="py-12 bg-gray-100 rounded-2xl">
                       <div className="text-center mb-12">
-                        <h2 className="text-3xl font-bold">Featured Project</h2>
+                        <h2 className="text-3xl font-bold">Our Recent Projects</h2>
                         <p className="text-gray-600 mt-2">See the transformation we created</p>
                       </div>
                       <div className="grid md:grid-cols-2 gap-8 items-center px-8">
@@ -294,7 +301,7 @@
                           onClick={() => setActiveTab('gallery')}
                           className="mt-6 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-colors shadow-md"
                         >
-                          View All Projects
+                          View Our Projects
                         </button>
                       </div>
                     </section>
@@ -423,7 +430,7 @@
                 {activeTab === 'gallery' && (
                   <div className="space-y-12">
                     <div className="text-center">
-                      <h1 className="text-4xl font-bold mb-4">Our Projects</h1>
+                      <h1 className="text-4xl font-bold mb-4">Our Work</h1>
                       <p className="text-xl text-gray-600">Transformations that speak for themselves</p>
                     </div>
                     <div className="grid gap-12">
@@ -445,6 +452,12 @@
                           </div>
                         </div>
                       ))}
+                      {/* Coming Soon Card (Example) - Can be removed when more projects are added */}
+                      {/* <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200 p-8 text-center">
+                        <h2 className="text-2xl font-bold mb-4">Coming Soon</h2>
+                        <p className="text-gray-700 mb-6">Check back soon for more of our latest projects!</p>
+                        <div className="bg-gray-200 border-2 border-dashed rounded-xl w-16 h-16 mx-auto" />
+                      </div> */}
                     </div>
                     <div className="text-center">
                       <button
@@ -817,7 +830,7 @@
                           {/* Option 3: Your custom logo (REPLACE WITH YOUR LOGO PATH) */}
                           <img
                             onClick={handleLogoClick}
-                            src="https://i.imgur.com/kNE47qb.png" // <<<<<<<<<<<<< CHANGE THIS PATH TO YOUR LOGO
+                            src="https://i.imgur.com/Ff2o0G0.png" // <<<<<<<<<<<<< CHANGE THIS PATH TO YOUR LOGO
                             alt="Barakah Homes Logo"
                             className="h-8 w-10 cursor-pointer" // Added cursor-pointer for visual cue
                           />
