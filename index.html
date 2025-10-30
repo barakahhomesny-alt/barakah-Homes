@@ -85,31 +85,32 @@
               title: "Historic Home Restoration",
               before: "https://i.imgur.com/J4aKFZl.jpeg",
               after: "https://i.imgur.com/zTlmZm3.jpeg",
-              description: "A meticulous restoration of a 1905 Victorian home..."
+              description: "A meticulous restoration of a 1905 Victorian home, preserving original architectural details like ornate trim and bay windows while upgrading the electrical, plumbing, and HVAC systems. The project included refinishing original hardwood floors and installing period-appropriate lighting fixtures, breathing new life into a historic landmark."
             },
             {
               id: 2,
               title: "Modern Kitchen Renovation",
               before: "https://i.imgur.com/OPiZBU6.png",
               after: "https://i.imgur.com/rZicTEU.png",
-              description: "Transformed a cramped, outdated 1980s kitchen..."
+              description: "Transformed a cramped, outdated 1980s kitchen into a spacious, light-filled culinary haven. We installed custom shaker-style cabinets with soft-close hinges, upgraded to energy-efficient stainless steel appliances, added a large granite island with seating, and incorporated LED under-cabinet lighting for a contemporary feel"
             },
             {
               id: 3,
               title: "Eco-Build Tiny Home",
               before: "https://i.imgur.com/U8wHROl.png",
               after: "https://i.imgur.com/ZOxgcvk.png",
-              description: "Designed and built a 400 sq ft off-grid tiny home..."
+              description: "Designed and built a 400 sq ft off-grid tiny home using sustainable materials like reclaimed wood and bamboo flooring. Features include a composting toilet, solar panel array for energy independence, and a rainwater collection system. The compact design maximizes space efficiency and minimizes environmental impact."
+
             },
            {
            id: 4,
            title: "Custom Metalwork Installation",
              before: "https://i.imgur.com/VCZLlQy.jpeg",
              after: "https://i.imgur.com/FO5L9Bx.jpeg",
-            description: "Fabricated and installed a unique, hand-welded steel railing..."
+            description: "Designed and built a 400 sq ft off-grid tiny home using sustainable materials like reclaimed wood and bamboo flooring. Features include a composting toilet, solar panel array for energy independence, and a rainwater collection system. The compact design maximizes space efficiency and minimizes environmental impact."
+
             }
           ];
-
           const renderStars = (rating) => {
             return (
               <div className="flex">
@@ -184,136 +185,7 @@
               </nav>
 
               <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-                {/* ... other tabs unchanged ... */}
-
-                {/* Refer & Earn Page — FULLY CONNECTED TO FORMSPREE */}
-                {activeTab === 'refer' && (
-                  <div className="space-y-12">
-                    <div className="text-center">
-                      <h1 className="text-4xl font-bold mb-4">Refer & Earn $500</h1>
-                      <p className="text-xl text-gray-600">Submit Your Referral in 30 Seconds</p>
-                    </div>
-                    <div className="max-w-3xl mx-auto bg-white p-8 rounded-xl shadow-lg border border-gray-200">
-                      {/* 🔗 Formspree Form */}
-                      <form
-                        action="https://formspree.io/f/YOUR_FORM_ID_HERE"  // ←←← REPLACE WITH YOUR ACTUAL FORMSPREE ENDPOINT
-                        method="POST"
-                        className="space-y-6"
-                      >
-                        <div className="grid md:grid-cols-2 gap-4">
-                          <div>
-                            <label className="block text-gray-700 font-bold mb-2" htmlFor="yourName">Your Name *</label>
-                            <input
-                              type="text"
-                              id="yourName"
-                              name="yourName"
-                              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                              required
-                            />
-                          </div>
-                          <div>
-                            <label className="block text-gray-700 font-bold mb-2" htmlFor="yourEmail">Your Email *</label>
-                            <input
-                              type="email"
-                              id="yourEmail"
-                              name="yourEmail"
-                              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                              required
-                            />
-                          </div>
-                        </div>
-                        <div>
-                          <label className="block text-gray-700 font-bold mb-2" htmlFor="yourPhone">Your Phone Number</label>
-                          <input
-                            type="tel"
-                            id="yourPhone"
-                            name="yourPhone"
-                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-gray-700 font-bold mb-2" htmlFor="friendName">Friend's Name</label>
-                          <input
-                            type="text"
-                            id="friendName"
-                            name="friendName"
-                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-gray-700 font-bold mb-2" htmlFor="friendPhone">Friend's Phone Number *</label>
-                          <input
-                            type="tel"
-                            id="friendPhone"
-                            name="friendPhone"
-                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            required
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-gray-700 font-bold mb-2" htmlFor="friendAddress">Friend's Property Address (if known)</label>
-                          <input
-                            type="text"
-                            id="friendAddress"
-                            name="friendAddress"
-                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-gray-700 font-bold mb-2" htmlFor="situation">What's their situation?</label>
-                          <select
-                            id="situation"
-                            name="situation"
-                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                          >
-                            <option value="">Select an option</option>
-                            <option value="Moving">Moving</option>
-                            <option value="Inherited Property">Inherited Property</option>
-                            <option value="Facing Foreclosure">Facing Foreclosure</option>
-                            <option value="Tired of Repairs">Tired of Repairs</option>
-                            <option value="Just Exploring">Just Exploring</option>
-                          </select>
-                        </div>
-                        <div className="flex items-start">
-                          <input
-                            type="checkbox"
-                            id="confirmed"
-                            name="confirmed"
-                            value="Yes, I informed my friend"
-                            className="mt-1 h-5 w-5 text-blue-600 rounded"
-                            required
-                          />
-                          <label htmlFor="confirmed" className="ml-2 block text-gray-700">
-                            I confirm I have let my friend know I'm referring them to Barakah Homes LLC.
-                          </label>
-                        </div>
-                        <button
-                          type="submit"
-                          className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-4 px-4 rounded-lg text-lg transition-colors shadow-lg"
-                        >
-                          Submit Referral & Claim My $500
-                        </button>
-                      </form>
-                    </div>
-
-                    {/* Trust & Legal Elements */}
-                    <div className="max-w-3xl mx-auto bg-blue-50 border-l-4 border-blue-500 p-6 rounded-r-lg">
-                      <h3 className="font-bold text-blue-900 text-lg mb-2">Our Promise:</h3>
-                      <p className="text-blue-800 italic">
-                        "We will NEVER use high-pressure sales tactics. We'll simply provide your friend with information and a fair, no-obligation offer. The choice to sell is always 100% theirs."
-                      </p>
-                    </div>
-
-                    <div className="max-w-3xl mx-auto bg-gray-50 p-6 rounded-lg border border-gray-200 text-sm text-gray-700">
-                      <h3 className="font-bold mb-2">Terms & Conditions:</h3>
-                      <p>
-                        The $500 referral bonus is paid via check within 7 business days after the successful closing of the referred property. There is no limit to how many referrals you can make. This program is subject to change or termination at any time.
-                      </p>
-                    </div>
-                  </div>
-                )}
-
-                {/* All other tab content remains exactly as in your original file */}
+                {/* Home Page */}
                 {activeTab === 'home' && (
                   <div className="space-y-16">
                     <section className="relative bg-gradient-to-r from-blue-900 to-green-800 rounded-2xl overflow-hidden shadow-xl">
@@ -326,7 +198,8 @@
                             Barakah Homes LLC
                           </h1>
                           <p className="text-xl md:text-2xl text-blue-100 mb-8 max-w-3xl mx-auto">
-                            Eco-Friendly Renovations & Custom Builds in Endicott
+                            Eco-Friendly Renovations & in Endicott and surrounding areas
+
                           </p>
                           <p className="text-xl md:text-2xl text-blue-100 mb-8 max-w-3xl mx-auto">
                             Expertly fixing homes & buying distressed properties. Transforming spaces for families and investors.
@@ -415,6 +288,8 @@
                     </section>
                   </div>
                 )}
+
+                {/* About Us Page */}
                 {activeTab === 'about' && (
                   <div className="space-y-12">
                     <div className="text-center">
@@ -430,13 +305,10 @@
                       <div>
                         <h2 className="text-2xl font-bold mb-4">Our Story</h2>
                         <p className="text-gray-700 mb-4">
-                          Founded by master welder and eco-builder Azad Hussein, Barakah Homes began as a small workshop
-                          specializing in custom metalwork. With over 20 years of experience in welding and design,
-                          we've expanded our expertise to focus on helping people fix their homes and transforming distressed properties for our community.
+                          Barakah Homes began with a simple belief: every home deserves quality craftsmanship and every homeowner deserves honest service. Founded by Azad Hussein—a skilled welder and builder with over two decades of experience—our company started as a small local workshop known for precision metalwork and custom builds.
                         </p>
                         <p className="text-gray-700 mb-4">
                           Our passion for craftsmanship and environmental responsibility drives everything we do.
-                          We believe in creating quality, sustainable living spaces that benefit both individuals and the broader community.
                         </p>
                         <div className="bg-blue-50 p-6 rounded-lg border border-blue-200">
                           <h3 className="text-xl font-bold text-blue-900 mb-2">Our Vision</h3>
@@ -454,22 +326,24 @@
                         <div className="text-center">
                           <div className="text-4xl mb-4">🔧</div>
                           <h3 className="text-xl font-bold mb-2">Fixing & Renovations</h3>
-                          <p className="text-gray-600">Experienced in updating and repairing homes to meet client needs.</p>
+                          <p className="text-gray-600">Experienced in updating and repairing homes...</p>
                         </div>
                         <div className="text-center">
                           <div className="text-4xl mb-4">🏠</div>
                           <h3 className="text-xl font-bold mb-2">Distressed Property Handling</h3>
-                          <p className="text-gray-600">Skilled in buying, renovating, and reselling/renting challenging properties.</p>
+                          <p className="text-gray-600">Skilled in buying, renovating...</p>
                         </div>
                         <div className="text-center">
                           <div className="text-4xl mb-4">🌿</div>
                           <h3 className="text-xl font-bold mb-2">Eco-Build Focus</h3>
-                          <p className="text-gray-600">Sustainable materials and energy-efficient construction methods.</p>
+                          <p className="text-gray-600">Sustainable materials and energy-efficient...</p>
                         </div>
                       </div>
                     </div>
                   </div>
                 )}
+
+                {/* Services Page */}
                 {activeTab === 'services' && (
                   <div className="space-y-12">
                     <div className="text-center">
@@ -480,25 +354,25 @@
                       {[
                         {
                           title: "Fixing & Renovations",
-                          description: "We specialize in updating and repairing homes to meet your specific needs and enhance your living space. From small repairs to full renovations, we ensure quality and reliability.",
+                          description: "We specialize in updating and repairing homes...",
                           icon: "🔧",
                           features: ["Complete home assessments", "Structural repairs", "Cosmetic updates", "Plumbing & electrical work"]
                         },
                         {
                           title: "Additions & Conversion",
-                          description: "Expand your living space with our expert additions and conversions. Whether you need an extra bathroom, a new family room, or want to convert your garage into a functional studio, we handle the project from design to finish.",
+                          description: "Expand your living space...",
                           icon: "🏠",
                           features: ["Bathroom additions", "Family room expansions", "Garage to studio conversions", "Permit assistance", "Custom design consultation"]
                         },
                         {
                           title: "Eco-Builds",
-                          description: "Our sustainable construction approach uses eco-friendly materials and energy-efficient systems to create homes that are beautiful, healthy, and gentle on the environment.",
+                          description: "Our sustainable construction approach...",
                           icon: "🌿",
                           features: ["Passive solar design", "Recycled materials", "Energy-efficient systems", "Water conservation"]
                         },
                         {
                           title: "Custom Welding",
-                          description: "With over 20 years of welding expertise, we create custom metalwork solutions for both functional and artistic applications, from structural elements to decorative features.",
+                          description: "With over 20 years of welding expertise...",
                           icon: "🔥",
                           features: ["Structural steelwork", "Decorative railings", "Custom furniture", "Artistic installations"]
                         }
@@ -532,6 +406,8 @@
                     </div>
                   </div>
                 )}
+
+                {/* Gallery/Projects Page */}
                 {activeTab === 'gallery' && (
                   <div className="space-y-12">
                     <div className="text-center">
@@ -568,6 +444,8 @@
                     </div>
                   </div>
                 )}
+
+                {/* Reviews Page */}
                 {activeTab === 'reviews' && (
                   <div className="space-y-12">
                     <div className="text-center">
@@ -649,6 +527,8 @@
                     </div>
                   </div>
                 )}
+
+                {/* Contact Page */}
                 {activeTab === 'contact' && (
                   <div className="space-y-12">
                     <div className="text-center">
@@ -786,6 +666,8 @@
                     </div>
                   </div>
                 )}
+
+                {/* Sell Property Page */}
                 {activeTab === 'sell-property' && (
                   <div className="space-y-12">
                     <div className="text-center">
@@ -878,7 +760,7 @@
                               id="property-description"
                               name="description"
                               rows="4"
-                              placeholder="Tell us about the condition of your property, any needed repairs, and why you're selling."
+                              placeholder="Tell us about the condition of your property..."
                               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                               required
                             ></textarea>
@@ -893,7 +775,7 @@
                               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                               multiple
                             />
-                            <p className="text-sm text-gray-500 mt-1">Upload multiple photos of your property (optional but helpful)</p>
+                            <p className="text-sm text-gray-500 mt-1">Upload multiple photos (optional but helpful)</p>
                           </div>
                           <button
                             type="submit"
@@ -909,8 +791,136 @@
                     </div>
                   </div>
                 )}
+
+                {/* ✅ NEW: Refer & Earn Page — using your Formspree endpoint */}
+                {activeTab === 'refer' && (
+                  <div className="space-y-12">
+                    <div className="text-center">
+                      <h1 className="text-4xl font-bold mb-4">Refer & Earn $500</h1>
+                      <p className="text-xl text-gray-600">Submit Your Referral in 30 Seconds</p>
+                    </div>
+                    <div className="max-w-3xl mx-auto bg-white p-8 rounded-xl shadow-lg border border-gray-200">
+                      <form
+                        action="https://formspree.io/f/movngwqw"
+                        method="POST"
+                        className="space-y-6"
+                      >
+                        <div className="grid md:grid-cols-2 gap-4">
+                          <div>
+                            <label className="block text-gray-700 font-bold mb-2" htmlFor="yourName">Your Name *</label>
+                            <input
+                              type="text"
+                              id="yourName"
+                              name="yourName"
+                              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                              required
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-gray-700 font-bold mb-2" htmlFor="yourEmail">Your Email *</label>
+                            <input
+                              type="email"
+                              id="yourEmail"
+                              name="yourEmail"
+                              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                              required
+                            />
+                          </div>
+                        </div>
+                        <div>
+                          <label className="block text-gray-700 font-bold mb-2" htmlFor="yourPhone">Your Phone Number</label>
+                          <input
+                            type="tel"
+                            id="yourPhone"
+                            name="yourPhone"
+                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-gray-700 font-bold mb-2" htmlFor="friendName">Friend's Name</label>
+                          <input
+                            type="text"
+                            id="friendName"
+                            name="friendName"
+                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-gray-700 font-bold mb-2" htmlFor="friendPhone">Friend's Phone Number *</label>
+                          <input
+                            type="tel"
+                            id="friendPhone"
+                            name="friendPhone"
+                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            required
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-gray-700 font-bold mb-2" htmlFor="friendAddress">Friend's Property Address (if known)</label>
+                          <input
+                            type="text"
+                            id="friendAddress"
+                            name="friendAddress"
+                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-gray-700 font-bold mb-2" htmlFor="situation">What's their situation?</label>
+                          <select
+                            id="situation"
+                            name="situation"
+                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          >
+                            <option value="">Select an option</option>
+                            <option value="Moving">Moving</option>
+                            <option value="Inherited Property">Inherited Property</option>
+                            <option value="Facing Foreclosure">Facing Foreclosure</option>
+                            <option value="Tired of Repairs">Tired of Repairs</option>
+                            <option value="Just Exploring">Just Exploring</option>
+                          </select>
+                        </div>
+                        <div className="flex items-start">
+                          <input
+                            type="checkbox"
+                            id="confirmed"
+                            name="confirmed"
+                            value="Yes"
+                            className="mt-1 h-5 w-5 text-blue-600 rounded"
+                            required
+                          />
+                          <label htmlFor="confirmed" className="ml-2 block text-gray-700">
+                            I confirm I have let my friend know I'm referring them to Barakah Homes LLC.
+                          </label>
+                        </div>
+                        <button
+                          type="submit"
+                          className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-4 px-4 rounded-lg text-lg transition-colors shadow-lg"
+                        >
+                          Submit Referral & Claim My $500
+                        </button>
+                      </form>
+                    </div>
+
+                    {/* Trust Statement */}
+                    <div className="max-w-3xl mx-auto bg-blue-50 border-l-4 border-blue-500 p-6 rounded-r-lg">
+                      <h3 className="font-bold text-blue-900 text-lg mb-2">Our Promise:</h3>
+                      <p className="text-blue-800 italic">
+                        "We will NEVER use high-pressure sales tactics. We'll simply provide your friend with information and a fair, no-obligation offer. The choice to sell is always 100% theirs."
+                      </p>
+                    </div>
+
+                    {/* Terms & Conditions */}
+                    <div className="max-w-3xl mx-auto bg-gray-50 p-6 rounded-lg border border-gray-200 text-sm text-gray-700">
+                      <h3 className="font-bold mb-2">Terms & Conditions:</h3>
+                      <p>
+                        The $500 referral bonus is paid via check within 7 business days after the successful closing of the referred property. There is no limit to how many referrals you can make. This program is subject to change or termination at any time.
+                      </p>
+                    </div>
+                  </div>
+                )}
               </main>
 
+              {/* Footer */}
               <footer className="bg-gradient-to-r from-blue-900 to-green-800 text-white mt-16">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
                   <div className="grid md:grid-cols-4 gap-8">
