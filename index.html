@@ -1,269 +1,1029 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Barakah Homes – Home</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barakah Homes</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for social media icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="bg-gray-50">
-  <!-- Navigation -->
-  <nav class="bg-gradient-to-r from-blue-900 to-green-800 text-white shadow-lg">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-16">
-        <div class="flex items-center">
-          <a href="index.html">
-            <img src="https://i.imgur.com/Ff2o0G0.png" alt="Barakah Homes Logo" class="h-10 w-14" />
-          </a>
-          <a href="index.html" class="text-2xl font-bold ml-2">Barakah Homes</a>
-        </div>
-        <div class="hidden md:block">
-          <div class="ml-10 flex items-baseline space-x-4">
-            <a href="index.html" class="px-3 py-2 rounded-md text-sm font-medium bg-white text-blue-900 font-bold">Home</a>
-            <a href="about.html" class="px-3 py-2 rounded-md text-sm font-medium text-white hover:bg-blue-700">About</a>
-            <a href="services.html" class="px-3 py-2 rounded-md text-sm font-medium text-white hover:bg-blue-700">Services</a>
-            <a href="gallery.html" class="px-3 py-2 rounded-md text-sm font-medium text-white hover:bg-blue-700">Gallery</a>
-            <a href="reviews.html" class="px-3 py-2 rounded-md text-sm font-medium text-white hover:bg-blue-700">Reviews</a>
-            <a href="contact.html" class="px-3 py-2 rounded-md text-sm font-medium text-white hover:bg-blue-700">Contact</a>
-            <a href="sell-property.html" class="px-3 py-2 rounded-md text-sm font-medium text-white hover:bg-blue-700">Sell Property</a>
-            <a href="refer.html" class="px-3 py-2 rounded-md text-sm font-medium text-white hover:bg-blue-700">Refer & Earn</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </nav>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        const { useState } = React;
+        const App = () => {
+          const [activeTab, setActiveTab] = useState('home');
+          const [reviews, setReviews] = useState([
+            {
+              id: 1,
+              name: "Sarah Johnson",
+              rating: 5,
+              comment: "Barakah Homes transformed our old house into a beautiful home. Their attention to detail and craftsmanship is unmatched!",
+              date: "2023-10-15"
+            },
+            {
+              id: 2,
+              name: "Michael Chen",
+              rating: 4,
+              comment: "Professional team, fair pricing, and excellent communication throughout the renovation process.",
+              date: "2023-09-22"
+            },
+            {
+              id: 3,
+              name: "Emma Rodriguez",
+              rating: 5,
+              comment: "The eco-build tiny home they created for us is perfect! Sustainable, beautiful, and exactly what we wanted.",
+              date: "2023-08-30"
+            }
+          ]);
+          const [newReview, setNewReview] = useState({
+            name: '',
+            rating: 5,
+            comment: ''
+          });
+          const contactInfo = {
+            phone: "607-778-9262",
+            email: "info@barakahhomesllc.com",
+            address: "403 Exchange Ave, Endicott, NY, 13760",
+            hours: [
+              "Monday - Friday: 8am - 6pm",
+              "Saturday: 9am - 4pm",
+              "Sunday: Closed"
+            ]
+          };
+          const socialLinks = {
+            instagram: "https://instagram.com/Barakah_Builds",
+            youtube: "https://youtube.com/@technofix9585",
+            facebook: "https://www.facebook.com/profile.php?id=61581833123401"
+          };
+          const handleReviewChange = (e) => {
+            const { name, value } = e.target;
+            setNewReview({ ...newReview, [name]: name === 'rating' ? parseInt(value) : value });
+          };
+          const handleSubmitReview = (e) => {
+            e.preventDefault();
+            if (newReview.name && newReview.comment) {
+              const review = {
+                id: reviews.length + 1,
+                ...newReview,
+                date: new Date().toISOString().split('T')[0]
+              };
+              setReviews([review, ...reviews]);
+              setNewReview({ name: '', rating: 5, comment: '' });
+              alert('Thank you for your review!');
+            } else {
+              alert('Please fill in all required fields.');
+            }
+          };
+          const projects = [
+            {
+              id: 1,
+              title: "Historic Home Restoration",
+              before: "https://i.imgur.com/J4aKFZl.jpeg",
+              after: "https://i.imgur.com/zTlmZm3.jpeg",
+              description: "A meticulous restoration of a 1905 Victorian home, preserving original architectural details like ornate trim and bay windows while upgrading the electrical, plumbing, and HVAC systems. The project included refinishing original hardwood floors and installing period-appropriate lighting fixtures, breathing new life into a historic landmark."
+            },
+            {
+              id: 2,
+              title: "Modern Kitchen Renovation",
+              before: "https://i.imgur.com/OPiZBU6.png",
+              after: "https://i.imgur.com/rZicTEU.png",
+              description: "Transformed a cramped, outdated 1980s kitchen into a spacious, light-filled culinary haven. We installed custom shaker-style cabinets with soft-close hinges, upgraded to energy-efficient stainless steel appliances, added a large granite island with seating, and incorporated LED under-cabinet lighting for a contemporary feel"
+            },
+            {
+              id: 3,
+              title: "Eco-Build Tiny Home",
+              before: "https://i.imgur.com/U8wHROl.png",
+              after: "https://i.imgur.com/ZOxgcvk.png",
+              description: "Designed and built a 400 sq ft off-grid tiny home using sustainable materials like reclaimed wood and bamboo flooring. Features include a composting toilet, solar panel array for energy independence, and a rainwater collection system. The compact design maximizes space efficiency and minimizes environmental impact."
 
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-    <div class="space-y-16">
-      <!-- Hero -->
-      <section class="relative bg-gradient-to-r from-blue-900 to-green-800 rounded-2xl overflow-hidden shadow-xl">
-        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://i.imgur.com/h2qsBDA.png');">
-          <div class="absolute inset-0 bg-black bg-opacity-50"></div>
-        </div>
-        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
-          <div class="text-center">
-            <h1 class="text-4xl md:text-6xl font-bold text-white mb-2">Barakah Homes LLC</h1>
-            <p class="text-xl md:text-2xl text-blue-100 mb-8 max-w-3xl mx-auto">
-              Find Your Perfect Home Solution in Endicott and surrounding areas
-            </p>
-            <p class="text-xl md:text-2xl text-blue-100 mb-8 max-w-3xl mx-auto">
-              Get a fair cash offer for your property as-is, or let us handle your renovation with eco-friendly, expert craftsmanship.
-            </p>
-            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-              <a href="contact.html"
-                class="bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-4 px-8 rounded-full text-lg transition-transform transform hover:scale-105 shadow-lg">
-                Request Renovation Quote
-              </a>
-              <a href="sell-property.html"
-                class="bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-8 rounded-full text-lg transition-transform transform hover:scale-105 shadow-lg">
-                SELL YOUR PROPERTY FAST
-              </a>
+            },
+           {
+           id: 4,
+           title: "Custom Metalwork Installation",
+             before: "https://i.imgur.com/VCZLlQy.jpeg",
+             after: "https://i.imgur.com/FO5L9Bx.jpeg",
+            description: "Designed and built a 400 sq ft off-grid tiny home using sustainable materials like reclaimed wood and bamboo flooring. Features include a composting toilet, solar panel array for energy independence, and a rainwater collection system. The compact design maximizes space efficiency and minimizes environmental impact."
+
+            }
+          ];
+          const renderStars = (rating) => {
+            return (
+              <div className="flex">
+                {[...Array(5)].map((_, i) => (
+                  <svg
+                    key={i}
+                    className={`w-5 h-5 ${i < rating ? 'text-yellow-400' : 'text-gray-300'}`}
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                ))}
+              </div>
+            );
+          };
+          const handleLogoClick = () => {
+            setActiveTab('home');
+          };
+          return (
+            <div className="min-h-screen bg-gray-50">
+              {/* Navigation */}
+              <nav className="bg-gradient-to-r from-blue-900 to-green-800 text-white shadow-lg">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                  <div className="flex items-center justify-between h-16">
+                    <div className="flex items-center">
+                      <img
+                        onClick={handleLogoClick}
+                        src="https://i.imgur.com/Ff2o0G0.png"
+                        alt="Barakah Homes Logo"
+                        className="h-10 w-14 cursor-pointer"
+                      />
+                      <h1
+                        onClick={handleLogoClick}
+                        className="text-2xl font-bold cursor-pointer"
+                      >
+                        Barakah Homes
+                      </h1>
+                    </div>
+                    <div className="hidden md:block">
+                      <div className="ml-10 flex items-baseline space-x-4">
+                        {['home', 'about', 'services', 'gallery', 'reviews', 'contact', 'sell-property', 'refer'].map((tab) => (
+                          <button
+                            key={tab}
+                            onClick={() => setActiveTab(tab)}
+                            className={`px-3 py-2 rounded-md text-sm font-medium capitalize transition-colors ${
+                              activeTab === tab
+                                ? 'bg-white text-blue-900 font-bold'
+                                : 'text-white hover:bg-blue-700'
+                            }`}
+                          >
+                            {tab === 'refer' ? 'Refer & Earn' : tab.replace('-', ' ')}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="md:hidden">
+                      <select
+                        value={activeTab}
+                        onChange={(e) => setActiveTab(e.target.value)}
+                        className="bg-blue-800 text-white rounded-md py-2 px-3"
+                      >
+                        {['home', 'about', 'services', 'gallery', 'reviews', 'contact', 'sell-property', 'refer'].map((tab) => (
+                          <option key={tab} value={tab} className="capitalize">
+                            {tab === 'refer' ? 'Refer & Earn' : tab.replace('-', ' ')}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </nav>
+
+              <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                {/* Home Page */}
+                {activeTab === 'home' && (
+                  <div className="space-y-16">
+                    <section className="relative bg-gradient-to-r from-blue-900 to-green-800 rounded-2xl overflow-hidden shadow-xl">
+                      <div className="absolute inset-0 bg-cover bg-center" style={{backgroundImage: "https://i.imgur.com/h2qsBDA.png"}}>
+                        <div className="absolute inset-0 bg-black bg-opacity-50"></div>
+                      </div>
+                      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+                        <div className="text-center">
+                          <h1 className="text-4xl md:text-6xl font-bold text-white mb-2">
+                            Barakah Homes LLC
+                          </h1>
+                          <p className="text-xl md:text-2xl text-blue-100 mb-8 max-w-3xl mx-auto">
+                           Find Your Perfect Home Solution in Endicott and surrounding areas
+
+                          </p>
+                          <p className="text-xl md:text-2xl text-blue-100 mb-8 max-w-3xl mx-auto">
+                            Get a fair cash offer for your property as-is, or let us handle your renovation with eco-friendly, expert craftsmanship.
+                          </p>
+                          <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                            <button
+                              onClick={() => setActiveTab('contact')}
+                              className="bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-4 px-8 rounded-full text-lg transition-transform transform hover:scale-105 shadow-lg"
+                            >
+                              Request Renovation Quote 
+                            </button>
+                            <button
+                              onClick={() => setActiveTab('sell-property')}
+                              className="bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-8 rounded-full text-lg transition-transform transform hover:scale-105 shadow-lg"
+                            >
+                              SELL YOUR PROPERTY FAST
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+                    <section className="py-12 bg-white rounded-2xl shadow-lg">
+                      <div className="text-center mb-12">
+                        <h2 className="text-3xl font-bold">Why Choose Barakah Homes?</h2>
+                        <p className="text-gray-600 mt-2 max-w-2xl mx-auto">Trusted expertise for your property needs</p>
+                      </div>
+                      <div className="grid md:grid-cols-3 gap-8 px-8">
+                        <div className="text-center">
+                          <div className="text-4xl mb-4">🔧</div>
+                          <h3 className="text-xl font-bold mb-2">Owners Who Need Reliable Renovation Work</h3>
+                          <p className="text-gray-600">We fix and update your home to meet your needs and enhance its value.</p>
+                        </div>
+                        <div className="text-center">
+                          <div className="text-4xl mb-4">🏠</div>
+                          <h3 className="text-xl font-bold mb-2">Homeowners Who Need to Sell Fast</h3>
+                          <p className="text-gray-600">We buy homes in any condition for cash. No repairs, no agents, close in as little as 7 days.</p>
+                        </div>
+                        <div className="text-center">
+                          <div className="text-4xl mb-4">🤝</div>
+                          <h3 className="text-xl font-bold mb-2">Fair & Transparent</h3>
+                          <p className="text-gray-600">Honest pricing, clear communication, and reliable project timelines.</p>
+                        </div>
+                      </div>
+                    </section>
+                    <section className="py-12">
+                      <h2 className="text-3xl font-bold text-center mb-12">Our Services</h2>
+                      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                        {[
+                          { title: "Fixing & Renovations", icon: "🔧", desc: "Complete home updates and repairs tailored to your needs" },
+                          { title: "Additions & Conversion", icon: "🏠", desc: "Bathroom Addition, Family Rooms Addition, and Garage Studio Conversions" },
+                          { title: "Eco-Builds", icon: "🌿", desc: "Sustainable construction using eco-friendly materials" },
+                          { title: "Custom Welding", icon: "🔥", desc: "Artistic metalwork and structural welding solutions" }
+                        ].map((service, index) => (
+                          <div key={index} className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-gray-200">
+                            <div className="text-4xl mb-4 text-blue-600">{service.icon}</div>
+                            <h3 className="text-xl font-bold mb-2">{service.title}</h3>
+                            <p className="text-gray-600">{service.desc}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </section>
+                    <section className="py-12 bg-gray-100 rounded-2xl">
+                      <div className="text-center mb-12">
+                        <h2 className="text-3xl font-bold">Featured Project</h2>
+                        <p className="text-gray-600 mt-2">See the transformation we created</p>
+                      </div>
+                      <div className="grid md:grid-cols-2 gap-8 items-center px-8">
+                        <div>
+                          <img src={projects[0].before} alt="Before" className="rounded-lg shadow-lg w-full" />
+                          <p className="text-center mt-2 font-semibold text-gray-700">Before</p>
+                        </div>
+                        <div>
+                          <img src={projects[0].after} alt="After" className="rounded-lg shadow-lg w-full" />
+                          <p className="text-center mt-2 font-semibold text-gray-700">After</p>
+                        </div>
+                      </div>
+                      <div className="mt-8 text-center">
+                        <p className="text-lg text-gray-700 max-w-2xl mx-auto">{projects[0].description}</p>
+                        <button
+                          onClick={() => setActiveTab('gallery')}
+                          className="mt-6 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-colors shadow-md"
+                        >
+                          View Our Projects
+                        </button>
+                      </div>
+                    </section>
+                  </div>
+                )}
+
+                {/* About Us Page */}
+                {activeTab === 'about' && (
+                  <div className="space-y-12">
+                    <div className="text-center">
+                      <h1 className="text-4xl font-bold mb-4">About Barakah Homes</h1>
+                      <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                        Building with Purpose & Barakah since 2005
+                      </p>
+                    </div>
+                    <div className="grid md:grid-cols-2 gap-12 items-center">
+                      <div>
+                        <img src="https://placehold.co/600x400/3b82f6/fff?text=Our+Team" alt="Our Team" className="rounded-lg shadow-lg w-full" />
+                      </div>
+                      <div>
+                        <h2 className="text-2xl font-bold mb-4">Our Story</h2>
+                        <p className="text-gray-700 mb-4">
+                          Barakah Homes began with a simple belief: every home deserves quality craftsmanship and every homeowner deserves honest service. Founded by Azad Hussein—a skilled welder and builder with over two decades of experience—our company started as a small local workshop known for precision metalwork and custom builds.
+                        </p>
+                        <p className="text-gray-700 mb-4">
+                          Our passion for craftsmanship and environmental responsibility drives everything we do.
+                        </p>
+                        <div className="bg-blue-50 p-6 rounded-lg border border-blue-200">
+                          <h3 className="text-xl font-bold text-blue-900 mb-2">Our Vision</h3>
+                          <p className="text-blue-800">"To create sustainable, high-quality homes for our community."</p>
+                        </div>
+                        <div className="bg-green-50 p-6 rounded-lg mt-4 border border-green-200">
+                          <h3 className="text-xl font-bold text-green-900 mb-2">Our Mission</h3>
+                          <p className="text-green-800">"We fix homes for families and transform distressed properties with integrity and innovation."</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="bg-gray-100 rounded-xl p-8">
+                      <h2 className="text-2xl font-bold mb-6 text-center">Our Expertise</h2>
+                      <div className="grid md:grid-cols-3 gap-8">
+                        <div className="text-center">
+                          <div className="text-4xl mb-4">🔧</div>
+                          <h3 className="text-xl font-bold mb-2">Fixing & Renovations</h3>
+                          <p className="text-gray-600">Experienced in updating and repairing homes...</p>
+                        </div>
+                        <div className="text-center">
+                          <div className="text-4xl mb-4">🏠</div>
+                          <h3 className="text-xl font-bold mb-2">Distressed Property Handling</h3>
+                          <p className="text-gray-600">Skilled in buying, renovating...</p>
+                        </div>
+                        <div className="text-center">
+                          <div className="text-4xl mb-4">🌿</div>
+                          <h3 className="text-xl font-bold mb-2">Eco-Build Focus</h3>
+                          <p className="text-gray-600">Sustainable materials and energy-efficient...</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Services Page */}
+                {activeTab === 'services' && (
+                  <div className="space-y-12">
+                    <div className="text-center">
+                      <h1 className="text-4xl font-bold mb-4">Our Services</h1>
+                      <p className="text-xl text-gray-600">Quality craftsmanship for every project</p>
+                    </div>
+                    <div className="grid md:grid-cols-2 gap-8">
+                      {[
+                        {
+                          title: "Fixing & Renovations",
+                          description: "We specialize in updating and repairing homes...",
+                          icon: "🔧",
+                          features: ["Complete home assessments", "Structural repairs", "Cosmetic updates", "Plumbing & electrical work"]
+                        },
+                        {
+                          title: "Additions & Conversion",
+                          description: "Expand your living space...",
+                          icon: "🏠",
+                          features: ["Bathroom additions", "Family room expansions", "Garage to studio conversions", "Permit assistance", "Custom design consultation"]
+                        },
+                        {
+                          title: "Eco-Builds",
+                          description: "Our sustainable construction approach...",
+                          icon: "🌿",
+                          features: ["Passive solar design", "Recycled materials", "Energy-efficient systems", "Water conservation"]
+                        },
+                        {
+                          title: "Custom Welding",
+                          description: "With over 20 years of welding expertise...",
+                          icon: "🔥",
+                          features: ["Structural steelwork", "Decorative railings", "Custom furniture", "Artistic installations"]
+                        }
+                      ].map((service, index) => (
+                        <div key={index} className="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition-shadow border border-gray-200">
+                          <div className="flex items-center mb-4">
+                            <div className="text-3xl mr-4 text-blue-600">{service.icon}</div>
+                            <h2 className="text-2xl font-bold">{service.title}</h2>
+                          </div>
+                          <p className="text-gray-700 mb-6">{service.description}</p>
+                          <ul className="space-y-2">
+                            {service.features.map((feature, i) => (
+                              <li key={i} className="flex items-center">
+                                <span className="w-2 h-2 bg-blue-600 rounded-full mr-3"></span>
+                                {feature}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="bg-gradient-to-r from-blue-900 to-green-800 text-white rounded-xl p-8 text-center">
+                      <h2 className="text-2xl font-bold mb-4">Ready to Start Your Project?</h2>
+                      <p className="mb-6">Contact us today for a free consultation and quote</p>
+                      <button
+                        onClick={() => setActiveTab('contact')}
+                        className="bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-3 px-8 rounded-lg transition-colors shadow-lg"
+                      >
+                        Get in Touch
+                      </button>
+                    </div>
+                  </div>
+                )}
+
+                {/* Gallery/Projects Page */}
+                {activeTab === 'gallery' && (
+                  <div className="space-y-12">
+                    <div className="text-center">
+                      <h1 className="text-4xl font-bold mb-4">Our Work</h1>
+                      <p className="text-xl text-gray-600">Transformations that speak for themselves</p>
+                    </div>
+                    <div className="grid gap-12">
+                      {projects.map((project) => (
+                        <div key={project.id} className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200">
+                          <div className="p-8">
+                            <h2 className="text-2xl font-bold mb-4 text-center">{project.title}</h2>
+                            <div className="grid md:grid-cols-2 gap-8 mb-6">
+                              <div>
+                                <img src={project.before} alt="Before" className="rounded-lg w-full shadow-md" />
+                                <p className="text-center mt-2 font-semibold text-gray-700">Before</p>
+                              </div>
+                              <div>
+                                <img src={project.after} alt="After" className="rounded-lg w-full shadow-md" />
+                                <p className="text-center mt-2 font-semibold text-gray-700">After</p>
+                              </div>
+                            </div>
+                            <p className="text-gray-700 text-center text-lg">{project.description}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="text-center">
+                      <button
+                        onClick={() => setActiveTab('contact')}
+                        className="bg-gradient-to-r from-blue-900 to-green-800 hover:from-blue-800 hover:to-green-700 text-white font-bold py-4 px-8 rounded-lg text-lg transition-colors shadow-lg"
+                      >
+                        Start Your Transformation Today
+                      </button>
+                    </div>
+                  </div>
+                )}
+
+                {/* Reviews Page */}
+                {activeTab === 'reviews' && (
+                  <div className="space-y-12">
+                    <div className="text-center">
+                      <h1 className="text-4xl font-bold mb-4">Customer Reviews</h1>
+                      <p className="text-xl text-gray-600">What our clients say about us</p>
+                    </div>
+                    <div className="grid md:grid-cols-2 gap-8">
+                      <div className="space-y-6">
+                        <h2 className="text-2xl font-bold mb-6">Recent Reviews</h2>
+                        {reviews.map((review) => (
+                          <div key={review.id} className="bg-white p-6 rounded-xl shadow-lg border border-gray-200">
+                            <div className="flex justify-between items-start mb-4">
+                              <h3 className="text-xl font-bold">{review.name}</h3>
+                              <span className="text-gray-500 text-sm">{review.date}</span>
+                            </div>
+                            <div className="mb-4">
+                              {renderStars(review.rating)}
+                            </div>
+                            <p className="text-gray-700">{review.comment}</p>
+                          </div>
+                        ))}
+                      </div>
+                      <div>
+                        <h2 className="text-2xl font-bold mb-6">Leave a Review</h2>
+                        <form onSubmit={handleSubmitReview} className="bg-white p-6 rounded-xl shadow-lg space-y-4 border border-gray-200">
+                          <div>
+                            <label className="block text-gray-700 font-bold mb-2" htmlFor="review-name">Your Name *</label>
+                            <input
+                              type="text"
+                              id="review-name"
+                              name="name"
+                              value={newReview.name}
+                              onChange={handleReviewChange}
+                              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                              required
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-gray-700 font-bold mb-2">Rating *</label>
+                            <div className="flex space-x-2">
+                              {[1, 2, 3, 4, 5].map((star) => (
+                                <button
+                                  key={star}
+                                  type="button"
+                                  onClick={() => setNewReview({...newReview, rating: star})}
+                                  className="text-2xl focus:outline-none"
+                                >
+                                  <svg
+                                    className={`w-8 h-8 ${star <= newReview.rating ? 'text-yellow-400' : 'text-gray-300'}`}
+                                    fill="currentColor"
+                                    viewBox="0 0 20 20"
+                                  >
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                  </svg>
+                                </button>
+                              ))}
+                            </div>
+                          </div>
+                          <div>
+                            <label className="block text-gray-700 font-bold mb-2" htmlFor="review-comment">Your Review *</label>
+                            <textarea
+                              id="review-comment"
+                              name="comment"
+                              value={newReview.comment}
+                              onChange={handleReviewChange}
+                              rows="4"
+                              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                              required
+                            ></textarea>
+                          </div>
+                          <button
+                            type="submit"
+                            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg transition-colors"
+                          >
+                            Submit Review
+                          </button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Contact Page */}
+                {activeTab === 'contact' && (
+                  <div className="space-y-12">
+                    <div className="text-center">
+                      <h1 className="text-4xl font-bold mb-4">Contact Us</h1>
+                      <p className="text-xl text-gray-600">Let's discuss your project</p>
+                    </div>
+                    <div className="grid md:grid-cols-2 gap-12">
+                      <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-200">
+                        <h2 className="text-2xl font-bold mb-6">Get In Touch</h2>
+                        <div className="space-y-6">
+                          <div className="flex items-center">
+                            <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                              <span className="text-blue-600 text-xl">📞</span>
+                            </div>
+                            <div>
+                              <h3 className="font-bold">Phone</h3>
+                              <p className="text-gray-700">
+                                <a href={`tel:${contactInfo.phone.replace(/-/g, '')}`}>{contactInfo.phone}</a>
+                              </p>
+                            </div>
+                          </div>
+                          <div className="flex items-center">
+                            <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                              <span className="text-blue-600 text-xl">✉️</span>
+                            </div>
+                            <div>
+                              <h3 className="font-bold">Email</h3>
+                              <p className="text-gray-700">
+                                <a href={`mailto:${contactInfo.email}`}>{contactInfo.email}</a>
+                              </p>
+                            </div>
+                          </div>
+                          <div className="flex items-center">
+                            <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                              <span className="text-blue-600 text-xl">📍</span>
+                            </div>
+                            <div>
+                              <h3 className="font-bold">Address</h3>
+                              <p className="text-gray-700">{contactInfo.address}</p>
+                            </div>
+                          </div>
+                          <div className="flex items-center">
+                            <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                              <span className="text-blue-600 text-xl">🕒</span>
+                            </div>
+                            <div>
+                              <h3 className="font-bold">Hours</h3>
+                              {contactInfo.hours.map((hour, index) => (
+                                <p key={index} className="text-gray-700">{hour}</p>
+                              ))}
+                            </div>
+                          </div>
+                          <div className="pt-4">
+                            <h3 className="font-bold text-lg mb-3">Follow Us</h3>
+                            <div className="flex space-x-4">
+                              <a
+                                href={socialLinks.facebook}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="w-12 h-12 bg-blue-700 rounded-full flex items-center justify-center text-white hover:opacity-80 transition-opacity"
+                              >
+                                <i className="fab fa-facebook-f text-xl"></i>
+                              </a>
+                              <a
+                                href={socialLinks.instagram}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="w-12 h-12 bg-gradient-to-r from-purple-600 to-pink-500 rounded-full flex items-center justify-center text-white hover:opacity-80 transition-opacity"
+                              >
+                                <i className="fab fa-instagram text-xl"></i>
+                              </a>
+                              <a
+                                href={socialLinks.youtube}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center text-white hover:opacity-80 transition-opacity"
+                              >
+                                <i className="fab fa-youtube text-xl"></i>
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-200">
+                        <h2 className="text-2xl font-bold mb-6">Send Us a Message</h2>
+                        <form action="https://formspree.io/f/movngwqw" method="POST" className="space-y-4">
+                          <div>
+                            <label className="block text-gray-700 font-bold mb-2" htmlFor="name">Name</label>
+                            <input
+                              type="text"
+                              id="name"
+                              name="name"
+                              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                              required
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-gray-700 font-bold mb-2" htmlFor="email">Email</label>
+                            <input
+                              type="email"
+                              id="email"
+                              name="email"
+                              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                              required
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-gray-700 font-bold mb-2" htmlFor="phone">Phone</label>
+                            <input
+                              type="tel"
+                              id="phone"
+                              name="phone"
+                              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                              required
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-gray-700 font-bold mb-2" htmlFor="message">Message</label>
+                            <textarea
+                              id="message"
+                              name="message"
+                              rows="5"
+                              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                              required
+                            ></textarea>
+                          </div>
+                          <button
+                            type="submit"
+                            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg transition-colors"
+                          >
+                            Send Message
+                          </button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Sell Property Page */}
+                {activeTab === 'sell-property' && (
+                  <div className="space-y-12">
+                    <div className="text-center">
+                      <h1 className="text-4xl font-bold mb-4">Sell Your Distressed Property</h1>
+                      <p className="text-xl text-gray-600">We buy houses in any condition - no repairs needed!</p>
+                    </div>
+                    <div className="bg-gradient-to-r from-red-500 to-orange-500 text-white rounded-xl p-8 text-center mb-12 shadow-xl">
+                      <h2 className="text-2xl font-bold mb-4">Why Sell to Us?</h2>
+                      <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+                        <div>
+                          <div className="text-3xl mb-2">💰</div>
+                          <h3 className="font-bold">Fair Cash Offers</h3>
+                          <p>Get a competitive offer without the hassle of traditional sales</p>
+                        </div>
+                        <div>
+                          <div className="text-3xl mb-2">⚡</div>
+                          <h3 className="font-bold">Fast Closing</h3>
+                          <p>Close in as little as 7 days - no waiting for bank approvals</p>
+                        </div>
+                        <div>
+                          <div className="text-3xl mb-2">🏠</div>
+                          <h3 className="font-bold">As-Is Condition</h3>
+                          <p>No need to make repairs or clean up - we buy properties in any condition</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="max-w-3xl mx-auto">
+                        <form
+                          action="https://formspree.io/f/mpwjvrwj"
+                          method="POST"
+                          encType="multipart/form-data"
+                          className="space-y-6 bg-white p-8 rounded-xl shadow-lg border border-gray-200"
+                        >
+                          <h2 className="text-2xl font-bold text-center mb-6">Tell Us About Your Property</h2>
+                          <div className="grid md:grid-cols-2 gap-4">
+                            <div>
+                              <label className="block text-gray-700 font-bold mb-2" htmlFor="property-name">Your Name</label>
+                              <input
+                                type="text"
+                                id="property-name"
+                                name="name"
+                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                required
+                              />
+                            </div>
+                            <div>
+                              <label className="block text-gray-700 font-bold mb-2" htmlFor="property-email">Email</label>
+                              <input
+                                type="email"
+                                id="property-email"
+                                name="email"
+                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                required
+                              />
+                            </div>
+                          </div>
+                          <div>
+                            <label className="block text-gray-700 font-bold mb-2" htmlFor="property-phone">Phone</label>
+                            <input
+                              type="tel"
+                              id="property-phone"
+                              name="phone"
+                              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                              required
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-gray-700 font-bold mb-2" htmlFor="property-address">Property Address</label>
+                            <input
+                              type="text"
+                              id="property-address"
+                              name="address"
+                              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                              required
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-gray-700 font-bold mb-2" htmlFor="property-price">Asking Price (if any)</label>
+                            <input
+                              type="text"
+                              id="property-price"
+                              name="price"
+                              placeholder="$0"
+                              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-gray-700 font-bold mb-2" htmlFor="property-description">Property Description</label>
+                            <textarea
+                              id="property-description"
+                              name="description"
+                              rows="4"
+                              placeholder="Tell us about the condition of your property..."
+                              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                              required
+                            ></textarea>
+                          </div>
+                          <div>
+                            <label className="block text-gray-700 font-bold mb-2" htmlFor="property-photos">Property Photos</label>
+                            <input
+                              type="file"
+                              id="property-photos"
+                              name="photos"
+                              accept="image/*"
+                              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                              multiple
+                            />
+                            <p className="text-sm text-gray-500 mt-1">Upload multiple photos (optional but helpful)</p>
+                          </div>
+                          <button
+                            type="submit"
+                            className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-4 rounded-lg text-lg transition-colors"
+                          >
+                            Submit Property Information
+                          </button>
+                        </form>
+                      <div className="mt-8 text-center">
+                        <p className="text-gray-600 mb-4">Prefer to talk directly?</p>
+                        <p className="text-lg font-bold">Call us at <a href={`tel:${contactInfo.phone.replace(/-/g, '')}`} className="text-blue-600">{contactInfo.phone}</a></p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* ✅ NEW: Refer & Earn Page — using your Formspree endpoint */}
+                {activeTab === 'refer' && (
+                  <div className="space-y-12">
+                    <div className="text-center">
+                      <h1 className="text-4xl font-bold mb-4">Refer & Earn $500</h1>
+                      <p className="text-xl text-gray-600">Submit Your Referral in 30 Seconds</p>
+                    </div>
+                    <div className="max-w-3xl mx-auto bg-white p-8 rounded-xl shadow-lg border border-gray-200">
+                      <form
+                        action="https://formspree.io/f/movngwqw"
+                        method="POST"
+                        className="space-y-6"
+                      >
+                        <div className="grid md:grid-cols-2 gap-4">
+                          <div>
+                            <label className="block text-gray-700 font-bold mb-2" htmlFor="yourName">Your Name *</label>
+                            <input
+                              type="text"
+                              id="yourName"
+                              name="yourName"
+                              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                              required
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-gray-700 font-bold mb-2" htmlFor="yourEmail">Your Email *</label>
+                            <input
+                              type="email"
+                              id="yourEmail"
+                              name="yourEmail"
+                              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                              required
+                            />
+                          </div>
+                        </div>
+                        <div>
+                          <label className="block text-gray-700 font-bold mb-2" htmlFor="yourPhone">Your Phone Number</label>
+                          <input
+                            type="tel"
+                            id="yourPhone"
+                            name="yourPhone"
+                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-gray-700 font-bold mb-2" htmlFor="friendName">Friend's Name</label>
+                          <input
+                            type="text"
+                            id="friendName"
+                            name="friendName"
+                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-gray-700 font-bold mb-2" htmlFor="friendPhone">Friend's Phone Number *</label>
+                          <input
+                            type="tel"
+                            id="friendPhone"
+                            name="friendPhone"
+                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            required
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-gray-700 font-bold mb-2" htmlFor="friendAddress">Friend's Property Address (if known)</label>
+                          <input
+                            type="text"
+                            id="friendAddress"
+                            name="friendAddress"
+                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-gray-700 font-bold mb-2" htmlFor="situation">What's their situation?</label>
+                          <select
+                            id="situation"
+                            name="situation"
+                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          >
+                            <option value="">Select an option</option>
+                            <option value="Moving">Moving</option>
+                            <option value="Inherited Property">Inherited Property</option>
+                            <option value="Facing Foreclosure">Facing Foreclosure</option>
+                            <option value="Tired of Repairs">Tired of Repairs</option>
+                            <option value="Just Exploring">Just Exploring</option>
+                          </select>
+                        </div>
+                        <div className="flex items-start">
+                          <input
+                            type="checkbox"
+                            id="confirmed"
+                            name="confirmed"
+                            value="Yes"
+                            className="mt-1 h-5 w-5 text-blue-600 rounded"
+                            required
+                          />
+                          <label htmlFor="confirmed" className="ml-2 block text-gray-700">
+                            I confirm I have let my friend know I'm referring them to Barakah Homes LLC.
+                          </label>
+                        </div>
+                        <button
+                          type="submit"
+                          className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-4 px-4 rounded-lg text-lg transition-colors shadow-lg"
+                        >
+                          Submit Referral & Claim My $500
+                        </button>
+                      </form>
+                    </div>
+
+                    {/* Trust Statement */}
+                    <div className="max-w-3xl mx-auto bg-blue-50 border-l-4 border-blue-500 p-6 rounded-r-lg">
+                      <h3 className="font-bold text-blue-900 text-lg mb-2">Our Promise:</h3>
+                      <p className="text-blue-800 italic">
+                        "We will NEVER use high-pressure sales tactics. We'll simply provide your friend with information and a fair, no-obligation offer. The choice to sell is always 100% theirs."
+                      </p>
+                    </div>
+
+                    {/* Terms & Conditions */}
+                    <div className="max-w-3xl mx-auto bg-gray-50 p-6 rounded-lg border border-gray-200 text-sm text-gray-700">
+                      <h3 className="font-bold mb-2">Terms & Conditions:</h3>
+                      <p>
+                        The $500 referral bonus is paid via check within 7 business days after the successful closing of the referred property. There is no limit to how many referrals you can make. This program is subject to change or termination at any time.
+                      </p>
+                    </div>
+                  </div>
+                )}
+              </main>
+
+              {/* Footer */}
+              <footer className="bg-gradient-to-r from-blue-900 to-green-800 text-white mt-16">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                  <div className="grid md:grid-cols-4 gap-8">
+                    <div>
+                      <div className="flex items-center mb-4">
+                        <img
+                          onClick={handleLogoClick}
+                          src="https://i.imgur.com/Ff2o0G0.png"
+                          alt="Barakah Homes Logo"
+                          className="h-8 w-10 cursor-pointer"
+                        />
+                        <h3
+                          onClick={handleLogoClick}
+                          className="text-xl font-bold cursor-pointer"
+                        >
+                          Barakah Homes
+                        </h3>
+                      </div>
+                      <p className="text-gray-300">
+                        Building with Purpose & Barakah since 2005. Sustainable, high-quality homes crafted with integrity and innovation.
+                      </p>
+                      <div className="flex space-x-4 mt-6">
+                        <a
+                          href={socialLinks.facebook}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="w-10 h-10 bg-blue-700 rounded-full flex items-center justify-center text-white hover:opacity-80 transition-opacity"
+                        >
+                          <i className="fab fa-facebook-f"></i>
+                        </a>
+                        <a
+                          href={socialLinks.instagram}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="w-10 h-10 bg-gradient-to-r from-purple-600 to-pink-500 rounded-full flex items-center justify-center text-white hover:opacity-80 transition-opacity"
+                        >
+                          <i className="fab fa-instagram"></i>
+                        </a>
+                        <a
+                          href={socialLinks.youtube}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="w-10 h-10 bg-red-600 rounded-full flex items-center justify-center text-white hover:opacity-80 transition-opacity"
+                        >
+                          <i className="fab fa-youtube"></i>
+                        </a>
+                      </div>
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-bold mb-4">Services</h3>
+                      <ul className="space-y-2 text-gray-300">
+                        <li>Fixing & Renovations</li>
+                        <li>Additions & Conversion</li>
+                        <li>Eco-Builds</li>
+                        <li>Custom Welding</li>
+                      </ul>
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-bold mb-4">Contact</h3>
+                      <ul className="space-y-2 text-gray-300">
+                        <li>📞 {contactInfo.phone}</li>
+                        <li>✉️ {contactInfo.email}</li>
+                        <li>📍 {contactInfo.address}</li>
+                      </ul>
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-bold mb-4">Quick Links</h3>
+                      <ul className="space-y-2">
+                        {['home', 'about', 'services', 'gallery', 'reviews', 'contact', 'sell-property', 'refer'].map((tab) => (
+                          <li key={tab}>
+                            <button
+                              onClick={() => setActiveTab(tab)}
+                              className="text-gray-300 hover:text-white transition-colors capitalize"
+                            >
+                              {tab === 'refer' ? 'Refer & Earn' : tab.replace('-', ' ')}
+                            </button>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                  <div className="border-t border-blue-700 mt-8 pt-8 text-center text-gray-400">
+                    <p>&copy; {new Date().getFullYear()} Barakah Homes. All rights reserved.</p>
+                  </div>
+                </div>
+              </footer>
             </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Why Choose -->
-      <section class="py-12 bg-white rounded-2xl shadow-lg">
-        <div class="text-center mb-12">
-          <h2 class="text-3xl font-bold">Why Choose Barakah Homes?</h2>
-          <p class="text-gray-600 mt-2 max-w-2xl mx-auto">Trusted expertise for your property needs</p>
-        </div>
-        <div class="grid md:grid-cols-3 gap-8 px-8">
-          <div class="text-center">
-            <div class="text-4xl mb-4">🔧</div>
-            <h3 class="text-xl font-bold mb-2">Owners Who Need Reliable Renovation Work</h3>
-            <p class="text-gray-600">We fix and update your home to meet your needs and enhance its value.</p>
-          </div>
-          <div class="text-center">
-            <div class="text-4xl mb-4">🏠</div>
-            <h3 class="text-xl font-bold mb-2">Homeowners Who Need to Sell Fast</h3>
-            <p class="text-gray-600">We buy homes in any condition for cash. No repairs, no agents, close in as little as 7 days.</p>
-          </div>
-          <div class="text-center">
-            <div class="text-4xl mb-4">🤝</div>
-            <h3 class="text-xl font-bold mb-2">Fair & Transparent</h3>
-            <p class="text-gray-600">Honest pricing, clear communication, and reliable project timelines.</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- YouTube Video -->
-      <section class="py-8">
-        <div class="text-center mb-8">
-          <h2 class="text-3xl font-bold">See What We Do</h2>
-          <p class="text-gray-600 mt-2 max-w-2xl mx-auto">A personal message from Azad Hussein, founder of Barakah Homes</p>
-        </div>
-        <div class="flex justify-center">
-          <div class="w-full max-w-3xl aspect-video bg-black rounded-2xl overflow-hidden shadow-xl">
-            <iframe
-              src="https://www.youtube.com/embed/YOUR_VIDEO_ID?autoplay=0&mute=0&controls=1"
-              title="Barakah Homes Introduction"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
-              class="w-full h-full"
-            ></iframe>
-          </div>
-        </div>
-      </section>
-
-      <!-- Services Preview -->
-      <section class="py-12">
-        <h2 class="text-3xl font-bold text-center mb-12">Our Services</h2>
-        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-          <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-200">
-            <div class="text-4xl mb-4 text-blue-600">🔧</div>
-            <h3 class="text-xl font-bold mb-2">Fixing & Renovations</h3>
-            <p class="text-gray-600">Complete home updates and repairs tailored to your needs</p>
-          </div>
-          <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-200">
-            <div class="text-4xl mb-4 text-blue-600">🏠</div>
-            <h3 class="text-xl font-bold mb-2">Additions & Conversion</h3>
-            <p class="text-gray-600">Bathroom Addition, Family Rooms Addition, and Garage Studio Conversions</p>
-          </div>
-          <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-200">
-            <div class="text-4xl mb-4 text-blue-600">🌿</div>
-            <h3 class="text-xl font-bold mb-2">Eco-Builds</h3>
-            <p class="text-gray-600">Sustainable construction using eco-friendly materials</p>
-          </div>
-          <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-200">
-            <div class="text-4xl mb-4 text-blue-600">🔥</div>
-            <h3 class="text-xl font-bold mb-2">Custom Welding</h3>
-            <p class="text-gray-600">Artistic metalwork and structural welding solutions</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- Featured Project -->
-      <section class="py-12 bg-gray-100 rounded-2xl">
-        <div class="text-center mb-12">
-          <h2 class="text-3xl font-bold">Featured Project</h2>
-          <p class="text-gray-600 mt-2">See the transformation we created</p>
-        </div>
-        <div class="grid md:grid-cols-2 gap-8 items-center px-8">
-          <div>
-            <img src="https://i.imgur.com/J4aKFZl.jpeg" alt="Before" class="rounded-lg shadow-lg w-full" />
-            <p class="text-center mt-2 font-semibold text-gray-700">Before</p>
-          </div>
-          <div>
-            <img src="https://i.imgur.com/zTlmZm3.jpeg" alt="After" class="rounded-lg shadow-lg w-full" />
-            <p class="text-center mt-2 font-semibold text-gray-700">After</p>
-          </div>
-        </div>
-        <div class="mt-8 text-center">
-          <p class="text-lg text-gray-700 max-w-2xl mx-auto">
-            A meticulous restoration of a 1905 Victorian home, preserving original architectural details...
-          </p>
-          <a href="gallery.html"
-            class="mt-6 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-colors shadow-md">
-            View Our Projects
-          </a>
-        </div>
-      </section>
-
-      <!-- ✅ FAQ SECTION -->
-      <section class="py-12 bg-white rounded-2xl shadow-lg max-w-4xl mx-auto px-6">
-        <div class="text-center mb-10">
-          <h2 class="text-3xl font-bold">Frequently Asked Questions</h2>
-        </div>
-        <div class="space-y-6 text-gray-700">
-          <div>
-            <h3 class="font-bold text-lg">Do I have to make repairs?</h3>
-            <p class="mt-1">No! We buy homes <strong>as-is</strong>, in any condition. No need to repair, clean, or stage.</p>
-          </div>
-          <div>
-            <h3 class="font-bold text-lg">How fast can we close?</h3>
-            <p class="mt-1">We can close in as little as <strong>7 days</strong>—much faster than listing with an agent.</p>
-          </div>
-          <div>
-            <h3 class="font-bold text-lg">Are there any fees?</h3>
-            <p class="mt-1">No hidden fees or commissions. Our cash offer is what you receive (minus standard closing costs, if any).</p>
-          </div>
-          <div>
-            <h3 class="font-bold text-lg">What areas do you buy in?</h3>
-            <p class="mt-1">We primarily serve <strong>Endicott, Binghamton, Johnson City, and all of Broome County, NY</strong>.</p>
-          </div>
-        </div>
-      </section>
-    </div>
-  </main>
-
-  <!-- Footer -->
-  <footer class="bg-gradient-to-r from-blue-900 to-green-800 text-white mt-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <div class="grid md:grid-cols-4 gap-8">
-        <div>
-          <div class="flex items-center mb-4">
-            <a href="index.html">
-              <img src="https://i.imgur.com/Ff2o0G0.png" alt="Barakah Homes Logo" class="h-8 w-10" />
-            </a>
-            <a href="index.html" class="text-xl font-bold ml-2">Barakah Homes</a>
-          </div>
-          <p class="text-gray-300">
-            Building with Purpose & Barakah since 2005. Sustainable, high-quality homes crafted with integrity and innovation.
-          </p>
-          <div class="flex space-x-4 mt-6">
-            <a href="https://www.facebook.com/profile.php?id=61581833123401" target="_blank" class="w-10 h-10 bg-blue-700 rounded-full flex items-center justify-center text-white hover:opacity-80">
-              <i class="fab fa-facebook-f"></i>
-            </a>
-            <a href="https://instagram.com/Barakah_Builds" target="_blank" class="w-10 h-10 bg-gradient-to-r from-purple-600 to-pink-500 rounded-full flex items-center justify-center text-white hover:opacity-80">
-              <i class="fab fa-instagram"></i>
-            </a>
-            <a href="https://youtube.com/@technofix9585" target="_blank" class="w-10 h-10 bg-red-600 rounded-full flex items-center justify-center text-white hover:opacity-80">
-              <i class="fab fa-youtube"></i>
-            </a>
-          </div>
-        </div>
-        <div>
-          <h3 class="text-lg font-bold mb-4">Services</h3>
-          <ul class="space-y-2 text-gray-300">
-            <li>Fixing & Renovations</li>
-            <li>Additions & Conversion</li>
-            <li>Eco-Builds</li>
-            <li>Custom Welding</li>
-          </ul>
-        </div>
-        <div>
-          <h3 class="text-lg font-bold mb-4">Contact</h3>
-          <ul class="space-y-2 text-gray-300">
-            <li>📞 607-778-9262</li>
-            <li>✉️ info@barakahhomesllc.com</li>
-            <li>📍 403 Exchange Ave, Endicott, NY, 13760</li>
-          </ul>
-        </div>
-        <div>
-          <h3 class="text-lg font-bold mb-4">Quick Links</h3>
-          <ul class="space-y-2">
-            <li><a href="index.html" class="text-gray-300 hover:text-white">Home</a></li>
-            <li><a href="about.html" class="text-gray-300 hover:text-white">About</a></li>
-            <li><a href="services.html" class="text-gray-300 hover:text-white">Services</a></li>
-            <li><a href="gallery.html" class="text-gray-300 hover:text-white">Gallery</a></li>
-            <li><a href="reviews.html" class="text-gray-300 hover:text-white">Reviews</a></li>
-            <li><a href="contact.html" class="text-gray-300 hover:text-white">Contact</a></li>
-            <li><a href="sell-property.html" class="text-gray-300 hover:text-white">Sell Property</a></li>
-            <li><a href="refer.html" class="text-gray-300 hover:text-white">Refer & Earn</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="border-t border-blue-700 mt-8 pt-8 text-center text-gray-400">
-        <p>&copy; 2025 Barakah Homes. All rights reserved.</p>
-      </div>
-    </div>
-  </footer>
-
-  <!-- Tawk.to -->
-  <script type="text/javascript">
+          );
+        };
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+    <!-- Tawk.to Live Chat -->
+    <script type="text/javascript">
     var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
     (function(){
-      var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-      s1.async=true;
-      s1.src='https://embed.tawk.to/69037dbad8bd2d195501a0e3/1j8qq68gu';
-      s1.charset='UTF-8';
-      s1.setAttribute('crossorigin','*');
-      s0.parentNode.insertBefore(s1,s0);
+    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+    s1.async=true;
+    s1.src='https://embed.tawk.to/69037dbad8bd2d195501a0e3/1j8qq68gu';
+    s1.charset='UTF-8';
+    s1.setAttribute('crossorigin','*');
+    s0.parentNode.insertBefore(s1,s0);
     })();
-  </script>
+    </script>
 </body>
 </html>
