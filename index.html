@@ -1,226 +1,269 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {/* NEW - SEO */}
-    <title>Barakah Homes | Sell Your House Fast for Cash in Endicott NY</title>
-    <meta name="description" content="We buy houses as-is for cash in Endicott, Binghamton & Vestal.  Fair offers, close in 7 days.  Or book expert eco-renovations.  Call 607-778-9262.">
-    <link rel="canonical" href="https://www.barakahhomesllc.com">
-
-    {/* NEW - Open-Graph / Social */}
-    <meta property="og:title" content="Barakah Homes | Cash Home Buyers & Renovators">
-    <meta property="og:description" content="Sell your house fast or remodel sustainably in Greater Binghamton.  Trusted since 2005.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.barakahhomesllc.com">
-    <meta property="og:image" content="https://i.imgur.com/h2qsBDA.png">
-
-    {/* NEW - Favicon */}
-    <link rel="icon" type="image/png" href="https://i.imgur.com/Ff2o0G0.png">
-
-    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Barakah Homes – Home</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 </head>
-<body>
-    <div id="root"></div>
-    <script type="text/babel">
-        const { useState } = React;
-
-        /* -------------------------------------------------- */
-        /* NEW - SMALL REUSABLE COMPONENTS                    */
-        /* -------------------------------------------------- */
-        const TrustBadges = () => (
-          <div className="bg-white/90 rounded-lg p-4 mt-6 grid grid-cols-2 md:grid-cols-4 gap-3 text-center text-blue-900 font-semibold">
-              <div>✅ Licensed & Insured</div>
-              <div>✅ A+ BBB Rating</div>
-              <div>✅ 150+ Homes Purchased</div>
-              <div>✅ 5-Star Reviews</div>
+<body class="bg-gray-50">
+  <!-- Navigation -->
+  <nav class="bg-gradient-to-r from-blue-900 to-green-800 text-white shadow-lg">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <div class="flex items-center">
+          <a href="index.html">
+            <img src="https://i.imgur.com/Ff2o0G0.png" alt="Barakah Homes Logo" class="h-10 w-14" />
+          </a>
+          <a href="index.html" class="text-2xl font-bold ml-2">Barakah Homes</a>
+        </div>
+        <div class="hidden md:block">
+          <div class="ml-10 flex items-baseline space-x-4">
+            <a href="index.html" class="px-3 py-2 rounded-md text-sm font-medium bg-white text-blue-900 font-bold">Home</a>
+            <a href="about.html" class="px-3 py-2 rounded-md text-sm font-medium text-white hover:bg-blue-700">About</a>
+            <a href="services.html" class="px-3 py-2 rounded-md text-sm font-medium text-white hover:bg-blue-700">Services</a>
+            <a href="gallery.html" class="px-3 py-2 rounded-md text-sm font-medium text-white hover:bg-blue-700">Gallery</a>
+            <a href="reviews.html" class="px-3 py-2 rounded-md text-sm font-medium text-white hover:bg-blue-700">Reviews</a>
+            <a href="contact.html" class="px-3 py-2 rounded-md text-sm font-medium text-white hover:bg-blue-700">Contact</a>
+            <a href="sell-property.html" class="px-3 py-2 rounded-md text-sm font-medium text-white hover:bg-blue-700">Sell Property</a>
+            <a href="refer.html" class="px-3 py-2 rounded-md text-sm font-medium text-white hover:bg-blue-700">Refer & Earn</a>
           </div>
-        );
+        </div>
+      </div>
+    </div>
+  </nav>
 
-        const QuickCTA = () => (
-          <div className="fixed bottom-0 left-0 right-0 bg-white/90 backdrop-blur shadow-lg p-3 flex items-center justify-between z-40 md:hidden">
-              <span className="text-blue-900 font-bold text-sm">Ready to sell or renovate?</span>
-              <button onClick={() => window.location.href='tel:6077789262'} className="bg-yellow-500 text-gray-900 px-4 py-2 rounded-full font-bold">Call Now</button>
-          </div>
-        );
-
-        const App = () => {
-          const [activeTab, setActiveTab] = useState('home');
-          /* all your existing useState & vars stay identical … */
-
-          /* -------------------------------------------------- */
-          /* NEW -  SIMPLE FAQ DATA                             */
-          /* -------------------------------------------------- */
-          const faqs=[
-             {q:"Do I have to make repairs?",a:"No. We buy exactly as-is—no cleaning, no repairs."},
-             {q:"How fast can we close?",a:"Often in 7-14 days, or on whatever date works for you."},
-             {q:"Are there any fees?",a:"Zero. We pay all closing costs—no commissions, no surprises."},
-             {q:"What areas do you buy in?",a:"All of Broome County: Endicott, Binghamton, Vestal, Johnson City, etc."}
-          ];
-
-          /* -------------------------------------------------- */
-          /* NEW -  SCHEMA JSON-LD (helps SEO)                 */
-          /* -------------------------------------------------- */
-          const schemaOrg={
-            "@context":"https://schema.org",
-            "@type":"HomeAndConstructionBusiness",
-            "name":"Barakah Homes LLC",
-            "image":"https://i.imgur.com/h2qsBDA.png",
-            "telephone":"+1-607-778-9262",
-            "email":"info@barakahhomesllc.com",
-            "address":{
-              "@type":"PostalAddress",
-              "streetAddress":"403 Exchange Ave",
-              "addressLocality":"Endicott",
-              "addressRegion":"NY",
-              "postalCode":"13760",
-              "addressCountry":"US"
-            },
-            "url":"https://www.barakahhomesllc.com",
-            "sameAs":[
-              "https://www.facebook.com/profile.php?id=61581833123401",
-              "https://instagram.com/Barakah_Builds",
-              "https://youtube.com/@technofix9585"
-            ],
-            "hasOfferCatalog":{
-              "@type":"OfferCatalog",
-              "name":"Services",
-              "itemListElement":[
-                {"@type":"Offer","itemOffered":{"@type":"Service","name":"We Buy Houses for Cash"}},
-                {"@type":"Offer","itemOffered":{"@type":"Service","name":"Home Renovations"}},
-                {"@type":"Offer","itemOffered":{"@type":"Service","name":"Eco-Builds"}},
-                {"@type":"Offer","itemOffered":{"@type":"Service","name":"Custom Welding"}}
-              ]
-            }
-          };
-
-          /* -------------------------------------------------- */
-          /* NEW -  INJECT JSON-LD ONCE                         */
-          /* -------------------------------------------------- */
-          React.useEffect(()=>{
-            const script = document.createElement("script");
-            script.type="application/ld+json";
-            script.text=JSON.stringify(schemaOrg);
-            document.head.appendChild(script);
-          },[]);
-
-          /* --------------------------------------------- */
-          /*  RENDER STAYS SAME UNTIL HOME SECTION        */
-          /* --------------------------------------------- */
-          return (
-            <div className="min-h-screen bg-gray-50">
-              {/* SAME NAV AS BEFORE */}
-              <nav className="bg-gradient-to-r from-blue-900 to-green-800 text-white shadow-lg sticky top-0 z-50">
-                 {/* nav content identical … */}
-              </nav>
-
-              <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-                {activeTab==='home' && (
-                  <div className="space-y-16">
-                    {/* HERO -  SAME CONTENT, ADD TRUST & CTA */}
-                    <section className="relative bg-gradient-to-r from-blue-900 to-green-800 rounded-2xl overflow-hidden shadow-xl">
-                       <div className="absolute inset-0 bg-cover bg-center" style={{backgroundImage:"url(https://i.imgur.com/h2qsBDA.png)"}}>
-                          <div className="absolute inset-0 bg-black/50"></div>
-                       </div>
-                       <div className="relative px-6 py-24 text-center text-white">
-                          <h1 className="text-4xl md:text-6xl font-bold mb-2">Barakah Homes LLC</h1>
-                          <p className="text-xl md:text-2xl mb-4 max-w-3xl mx-auto">Find Your Perfect Home Solution in Endicott and surrounding areas</p>
-                          <p className="text-lg mb-8 max-w-2xl mx-auto">Get a fair cash offer for your property as-is, or let us handle your renovation with eco-friendly, expert craftsmanship.</p>
-                          <div className="flex flex-col sm:flex-row justify-center gap-4">
-                             <button onClick={()=>setActiveTab('contact')} className="bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-4 px-8 rounded-full text-lg shadow-lg">Request Renovation Quote</button>
-                             <button onClick={()=>setActiveTab('sell-property')} className="bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-8 rounded-full text-lg shadow-lg">Sell Your Property Fast</button>
-                          </div>
-                          <TrustBadges/>
-                       </div>
-                    </section>
-
-                    {/* NEW -  HOW IT WORKS (SELL) */}
-                    <section className="py-12 bg-white rounded-2xl shadow-lg px-6">
-                       <h2 className="text-3xl font-bold text-center mb-8">How It Works – Selling Your House</h2>
-                       <div className="grid md:grid-cols-3 gap-8 text-center">
-                          <div><div className="bg-blue-100 text-blue-900 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 text-2xl font-bold">1</div><h3 className="font-bold mb-2">Tell Us About the Property</h3><p className="text-gray-600">30-second form or quick call.</p></div>
-                          <div><div className="bg-blue-100 text-blue-900 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 text-2xl font-bold">2</div><h3 className="font-bold mb-2">Get a Fair Cash Offer</h3><p className="text-gray-600">Usually within 24 hours.</p></div>
-                          <div><div className="bg-blue-100 text-blue-900 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 text-2xl font-bold">3</div><h3 className="font-bold mb-2">Close & Get Paid</h3><p className="text-gray-600">Pick your closing date – done!</p></div>
-                       </div>
-                    </section>
-
-                    {/* EXISTING SERVICES SECTION */}
-                    <section className="py-12">
-                       <h2 className="text-3xl font-bold text-center mb-12">Our Services</h2>
-                       <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                          {[
-                            {title:"Fixing & Renovations",icon:"🔧",desc:"Complete home updates and repairs tailored to your needs"},
-                            {title:"Additions & Conversion",icon:"🏠",desc:"Bathroom Addition, Family Rooms Addition, and Garage Studio Conversions"},
-                            {title:"Eco-Builds",icon:"🌿",desc:"Sustainable construction using eco-friendly materials"},
-                            {title:"Custom Welding",icon:"🔥",desc:"Artistic metalwork and structural welding solutions"}
-                          ].map(s=>(
-                            <div key={s.title} className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-gray-200">
-                               <div className="text-4xl mb-4 text-blue-600">{s.icon}</div>
-                               <h3 className="text-xl font-bold mb-2">{s.title}</h3>
-                               <p className="text-gray-600 mb-4">{s.desc}</p>
-                               <button onClick={()=>setActiveTab('contact')} className="text-blue-700 font-semibold hover:underline">Get quote →</button>
-                            </div>
-                          ))}
-                       </div>
-                    </section>
-
-                    {/* NEW -  FAQ ACCORDION */}
-                    <section className="py-12 bg-gray-100 rounded-2xl px-6">
-                       <h2 className="text-3xl font-bold text-center mb-8">Frequently Asked Questions</h2>
-                       <div className="max-w-3xl mx-auto space-y-4">
-                          {faqs.map((f,i)=>(
-                            <details key={i} className="bg-white p-4 rounded-lg shadow cursor-pointer">
-                               <summary className="font-bold text-blue-900">{f.q}</summary>
-                               <p className="mt-2 text-gray-700">{f.a}</p>
-                            </details>
-                          ))}
-                       </div>
-                    </section>
-
-                    {/* EXISTING FEATURED PROJECT */}
-                    <section className="py-12 bg-white rounded-2xl shadow-lg px-6">
-                       {/* same content … */}
-                    </section>
-                  </div>
-                )}
-
-                {/* OTHER PAGES UNCHANGED */}
-                {activeTab==='about' && ( <div className="space-y-12"> ... </div> )}
-                {activeTab==='services' && ( <div className="space-y-12"> ... </div> )}
-                {activeTab==='gallery' && ( <div className="space-y-12"> ... </div> )}
-                {activeTab==='reviews' && ( <div className="space-y-12"> ... </div> )}
-                {activeTab==='contact' && ( <div className="space-y-12"> ... </div> )}
-                {activeTab==='sell-property' && ( <div className="space-y-12"> ... </div> )}
-                {activeTab==='refer' && ( <div className="space-y-12"> ... </div> )}
-              </main>
-
-              {/* SAME FOOTER */}
-              <footer className="bg-gradient-to-r from-blue-900 to-green-800 text-white mt-16"> ... </footer>
-
-              {/* NEW -  MOBILE STICKY CTA BAR */}
-              <QuickCTA/>
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="space-y-16">
+      <!-- Hero -->
+      <section class="relative bg-gradient-to-r from-blue-900 to-green-800 rounded-2xl overflow-hidden shadow-xl">
+        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://i.imgur.com/h2qsBDA.png');">
+          <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+        </div>
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+          <div class="text-center">
+            <h1 class="text-4xl md:text-6xl font-bold text-white mb-2">Barakah Homes LLC</h1>
+            <p class="text-xl md:text-2xl text-blue-100 mb-8 max-w-3xl mx-auto">
+              Find Your Perfect Home Solution in Endicott and surrounding areas
+            </p>
+            <p class="text-xl md:text-2xl text-blue-100 mb-8 max-w-3xl mx-auto">
+              Get a fair cash offer for your property as-is, or let us handle your renovation with eco-friendly, expert craftsmanship.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+              <a href="contact.html"
+                class="bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-4 px-8 rounded-full text-lg transition-transform transform hover:scale-105 shadow-lg">
+                Request Renovation Quote
+              </a>
+              <a href="sell-property.html"
+                class="bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-8 rounded-full text-lg transition-transform transform hover:scale-105 shadow-lg">
+                SELL YOUR PROPERTY FAST
+              </a>
             </div>
-          );
-        };
+          </div>
+        </div>
+      </section>
 
-        const root = ReactDOM.createRoot(document.getElementById('root'));
-        root.render(<App />);
-    </script>
-    {/* Tawk.to Live Chat */}
-    <script type="text/javascript">
+      <!-- Why Choose -->
+      <section class="py-12 bg-white rounded-2xl shadow-lg">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold">Why Choose Barakah Homes?</h2>
+          <p class="text-gray-600 mt-2 max-w-2xl mx-auto">Trusted expertise for your property needs</p>
+        </div>
+        <div class="grid md:grid-cols-3 gap-8 px-8">
+          <div class="text-center">
+            <div class="text-4xl mb-4">🔧</div>
+            <h3 class="text-xl font-bold mb-2">Owners Who Need Reliable Renovation Work</h3>
+            <p class="text-gray-600">We fix and update your home to meet your needs and enhance its value.</p>
+          </div>
+          <div class="text-center">
+            <div class="text-4xl mb-4">🏠</div>
+            <h3 class="text-xl font-bold mb-2">Homeowners Who Need to Sell Fast</h3>
+            <p class="text-gray-600">We buy homes in any condition for cash. No repairs, no agents, close in as little as 7 days.</p>
+          </div>
+          <div class="text-center">
+            <div class="text-4xl mb-4">🤝</div>
+            <h3 class="text-xl font-bold mb-2">Fair & Transparent</h3>
+            <p class="text-gray-600">Honest pricing, clear communication, and reliable project timelines.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- YouTube Video -->
+      <section class="py-8">
+        <div class="text-center mb-8">
+          <h2 class="text-3xl font-bold">See What We Do</h2>
+          <p class="text-gray-600 mt-2 max-w-2xl mx-auto">A personal message from Azad Hussein, founder of Barakah Homes</p>
+        </div>
+        <div class="flex justify-center">
+          <div class="w-full max-w-3xl aspect-video bg-black rounded-2xl overflow-hidden shadow-xl">
+            <iframe
+              src="https://www.youtube.com/embed/YOUR_VIDEO_ID?autoplay=0&mute=0&controls=1"
+              title="Barakah Homes Introduction"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+              class="w-full h-full"
+            ></iframe>
+          </div>
+        </div>
+      </section>
+
+      <!-- Services Preview -->
+      <section class="py-12">
+        <h2 class="text-3xl font-bold text-center mb-12">Our Services</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-200">
+            <div class="text-4xl mb-4 text-blue-600">🔧</div>
+            <h3 class="text-xl font-bold mb-2">Fixing & Renovations</h3>
+            <p class="text-gray-600">Complete home updates and repairs tailored to your needs</p>
+          </div>
+          <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-200">
+            <div class="text-4xl mb-4 text-blue-600">🏠</div>
+            <h3 class="text-xl font-bold mb-2">Additions & Conversion</h3>
+            <p class="text-gray-600">Bathroom Addition, Family Rooms Addition, and Garage Studio Conversions</p>
+          </div>
+          <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-200">
+            <div class="text-4xl mb-4 text-blue-600">🌿</div>
+            <h3 class="text-xl font-bold mb-2">Eco-Builds</h3>
+            <p class="text-gray-600">Sustainable construction using eco-friendly materials</p>
+          </div>
+          <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-200">
+            <div class="text-4xl mb-4 text-blue-600">🔥</div>
+            <h3 class="text-xl font-bold mb-2">Custom Welding</h3>
+            <p class="text-gray-600">Artistic metalwork and structural welding solutions</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Featured Project -->
+      <section class="py-12 bg-gray-100 rounded-2xl">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold">Featured Project</h2>
+          <p class="text-gray-600 mt-2">See the transformation we created</p>
+        </div>
+        <div class="grid md:grid-cols-2 gap-8 items-center px-8">
+          <div>
+            <img src="https://i.imgur.com/J4aKFZl.jpeg" alt="Before" class="rounded-lg shadow-lg w-full" />
+            <p class="text-center mt-2 font-semibold text-gray-700">Before</p>
+          </div>
+          <div>
+            <img src="https://i.imgur.com/zTlmZm3.jpeg" alt="After" class="rounded-lg shadow-lg w-full" />
+            <p class="text-center mt-2 font-semibold text-gray-700">After</p>
+          </div>
+        </div>
+        <div class="mt-8 text-center">
+          <p class="text-lg text-gray-700 max-w-2xl mx-auto">
+            A meticulous restoration of a 1905 Victorian home, preserving original architectural details...
+          </p>
+          <a href="gallery.html"
+            class="mt-6 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-colors shadow-md">
+            View Our Projects
+          </a>
+        </div>
+      </section>
+
+      <!-- ✅ FAQ SECTION -->
+      <section class="py-12 bg-white rounded-2xl shadow-lg max-w-4xl mx-auto px-6">
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold">Frequently Asked Questions</h2>
+        </div>
+        <div class="space-y-6 text-gray-700">
+          <div>
+            <h3 class="font-bold text-lg">Do I have to make repairs?</h3>
+            <p class="mt-1">No! We buy homes <strong>as-is</strong>, in any condition. No need to repair, clean, or stage.</p>
+          </div>
+          <div>
+            <h3 class="font-bold text-lg">How fast can we close?</h3>
+            <p class="mt-1">We can close in as little as <strong>7 days</strong>—much faster than listing with an agent.</p>
+          </div>
+          <div>
+            <h3 class="font-bold text-lg">Are there any fees?</h3>
+            <p class="mt-1">No hidden fees or commissions. Our cash offer is what you receive (minus standard closing costs, if any).</p>
+          </div>
+          <div>
+            <h3 class="font-bold text-lg">What areas do you buy in?</h3>
+            <p class="mt-1">We primarily serve <strong>Endicott, Binghamton, Johnson City, and all of Broome County, NY</strong>.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-gradient-to-r from-blue-900 to-green-800 text-white mt-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="grid md:grid-cols-4 gap-8">
+        <div>
+          <div class="flex items-center mb-4">
+            <a href="index.html">
+              <img src="https://i.imgur.com/Ff2o0G0.png" alt="Barakah Homes Logo" class="h-8 w-10" />
+            </a>
+            <a href="index.html" class="text-xl font-bold ml-2">Barakah Homes</a>
+          </div>
+          <p class="text-gray-300">
+            Building with Purpose & Barakah since 2005. Sustainable, high-quality homes crafted with integrity and innovation.
+          </p>
+          <div class="flex space-x-4 mt-6">
+            <a href="https://www.facebook.com/profile.php?id=61581833123401" target="_blank" class="w-10 h-10 bg-blue-700 rounded-full flex items-center justify-center text-white hover:opacity-80">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://instagram.com/Barakah_Builds" target="_blank" class="w-10 h-10 bg-gradient-to-r from-purple-600 to-pink-500 rounded-full flex items-center justify-center text-white hover:opacity-80">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://youtube.com/@technofix9585" target="_blank" class="w-10 h-10 bg-red-600 rounded-full flex items-center justify-center text-white hover:opacity-80">
+              <i class="fab fa-youtube"></i>
+            </a>
+          </div>
+        </div>
+        <div>
+          <h3 class="text-lg font-bold mb-4">Services</h3>
+          <ul class="space-y-2 text-gray-300">
+            <li>Fixing & Renovations</li>
+            <li>Additions & Conversion</li>
+            <li>Eco-Builds</li>
+            <li>Custom Welding</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-lg font-bold mb-4">Contact</h3>
+          <ul class="space-y-2 text-gray-300">
+            <li>📞 607-778-9262</li>
+            <li>✉️ info@barakahhomesllc.com</li>
+            <li>📍 403 Exchange Ave, Endicott, NY, 13760</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-lg font-bold mb-4">Quick Links</h3>
+          <ul class="space-y-2">
+            <li><a href="index.html" class="text-gray-300 hover:text-white">Home</a></li>
+            <li><a href="about.html" class="text-gray-300 hover:text-white">About</a></li>
+            <li><a href="services.html" class="text-gray-300 hover:text-white">Services</a></li>
+            <li><a href="gallery.html" class="text-gray-300 hover:text-white">Gallery</a></li>
+            <li><a href="reviews.html" class="text-gray-300 hover:text-white">Reviews</a></li>
+            <li><a href="contact.html" class="text-gray-300 hover:text-white">Contact</a></li>
+            <li><a href="sell-property.html" class="text-gray-300 hover:text-white">Sell Property</a></li>
+            <li><a href="refer.html" class="text-gray-300 hover:text-white">Refer & Earn</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-blue-700 mt-8 pt-8 text-center text-gray-400">
+        <p>&copy; 2025 Barakah Homes. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Tawk.to -->
+  <script type="text/javascript">
     var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
     (function(){
-    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-    s1.async=true;
-    s1.src='https://embed.tawk.to/69037dbad8bd2d195501a0e3/1j8qq68gu';
-    s1.charset='UTF-8';
-    s1.setAttribute('crossorigin','*');
-    s0.parentNode.insertBefore(s1,s0);
+      var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+      s1.async=true;
+      s1.src='https://embed.tawk.to/69037dbad8bd2d195501a0e3/1j8qq68gu';
+      s1.charset='UTF-8';
+      s1.setAttribute('crossorigin','*');
+      s0.parentNode.insertBefore(s1,s0);
     })();
-    </script>
+  </script>
 </body>
 </html>
