@@ -130,7 +130,7 @@
           };
           return (
             <div className="min-h-screen bg-gray-50">
-              {/* Navigation — now sticky with CTA */}
+              {/* Navigation — now sticky with CTA in header */}
               <nav className="bg-gradient-to-r from-blue-900 to-green-800 text-white shadow-lg sticky top-0 z-50">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                   <div className="flex items-center justify-between h-16">
@@ -189,9 +189,10 @@
                 </div>
               </nav>
               <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-                {/* ✅ FULLY UPDATED HOME SECTION (same as before) */}
+                {/* Home Page */}
                 {activeTab === 'home' && (
                   <div className="space-y-16">
+                    {/* Hero Section – Dual Audience */}
                     <section className="relative bg-gradient-to-r from-blue-900 to-green-800 rounded-2xl overflow-hidden shadow-xl">
                       <div className="absolute inset-0 bg-cover bg-center" style={{backgroundImage: "https://i.imgur.com/h2qsBDA.png"}}>
                         <div className="absolute inset-0 bg-black bg-opacity-50"></div>
@@ -204,7 +205,10 @@
                           <p className="text-xl md:text-2xl text-blue-100 mb-10 max-w-3xl mx-auto">
                             Find Your Perfect Home Solution in Endicott and surrounding areas
                           </p>
+
+                          {/* Dual CTA Cards */}
                           <div className="flex flex-col sm:flex-row justify-center space-y-6 sm:space-y-0 sm:space-x-6">
+                            {/* Sellers Card */}
                             <div className="bg-red-50 border-2 border-red-200 p-6 rounded-xl max-w-md w-full">
                               <h3 className="text-2xl font-bold text-red-800 mb-3">Need to Sell Your House Fast?</h3>
                               <p className="text-gray-700 mb-4">
@@ -217,6 +221,8 @@
                                 Get Free Cash Offer
                               </button>
                             </div>
+
+                            {/* Renovation Card */}
                             <div className="bg-blue-50 border-2 border-blue-200 p-6 rounded-xl max-w-md w-full">
                               <h3 className="text-2xl font-bold text-blue-800 mb-3">Need Home Renovation?</h3>
                               <p className="text-gray-700 mb-4">
@@ -234,12 +240,14 @@
                       </div>
                     </section>
 
+                    {/* How It Works */}
                     <section className="py-12 bg-gray-50 rounded-2xl">
                       <div className="text-center mb-12">
                         <h2 className="text-3xl font-bold">How It Works</h2>
                         <p className="text-gray-600 mt-2">Simple, transparent processes for every need</p>
                       </div>
                       <div className="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto px-4">
+                        {/* For Sellers */}
                         <div className="bg-white p-6 rounded-xl shadow">
                           <h3 className="text-xl font-bold text-red-700 mb-4">Selling Your Home</h3>
                           <ol className="space-y-3">
@@ -251,6 +259,7 @@
                             ))}
                           </ol>
                         </div>
+                        {/* For Renovations */}
                         <div className="bg-white p-6 rounded-xl shadow">
                           <h3 className="text-xl font-bold text-blue-700 mb-4">Renovating Your Home</h3>
                           <ol className="space-y-3">
@@ -265,6 +274,7 @@
                       </div>
                     </section>
 
+                    {/* Why Choose Us */}
                     <section className="py-12 bg-white rounded-2xl shadow-lg">
                       <div className="text-center mb-12">
                         <h2 className="text-3xl font-bold">Why Choose Barakah Homes?</h2>
@@ -289,6 +299,7 @@
                       </div>
                     </section>
 
+                    {/* Services */}
                     <section className="py-12">
                       <h2 className="text-3xl font-bold text-center mb-12">Our Services</h2>
                       <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -307,6 +318,7 @@
                       </div>
                     </section>
 
+                    {/* Featured Project */}
                     <section className="py-12 bg-gray-100 rounded-2xl">
                       <div className="text-center mb-12">
                         <h2 className="text-3xl font-bold">Featured Project</h2>
@@ -333,6 +345,7 @@
                       </div>
                     </section>
 
+                    {/* Final CTA Banner */}
                     <div className="py-12 bg-gradient-to-r from-blue-900 to-green-800 rounded-2xl text-center">
                       <h2 className="text-2xl font-bold text-white mb-6">Ready to Get Started?</h2>
                       <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6 px-4">
@@ -353,7 +366,8 @@
                   </div>
                 )}
 
-                {/* Other tabs unchanged — kept for completeness */}
+                {/* About Us, Services, Gallery, Reviews, Contact, Refer — unchanged */}
+
                 {activeTab === 'about' && (
                   <div className="space-y-12">
                     <div className="text-center">
@@ -727,14 +741,14 @@
                   </div>
                 )}
 
-                {/* ✅ UPDATED: Sell Property — Now uses Google Form */}
+                {/* ✅ UPDATED: Sell Property — using Tally.so inline embed */}
                 {activeTab === 'sell-property' && (
                   <div className="space-y-12">
                     <div className="text-center">
                       <h1 className="text-4xl font-bold mb-4">Sell Your Distressed Property</h1>
                       <p className="text-xl text-gray-600">We buy houses in any condition - no repairs needed!</p>
                     </div>
-                    <div className="bg-gradient-to-r from-red-500 to-orange-500 text-white rounded-xl p-8 text-center mb-8 shadow-xl">
+                    <div className="bg-gradient-to-r from-red-500 to-orange-500 text-white rounded-xl p-8 text-center mb-12 shadow-xl">
                       <h2 className="text-2xl font-bold mb-4">Why Sell to Us?</h2>
                       <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
                         <div>
@@ -754,42 +768,27 @@
                         </div>
                       </div>
                     </div>
-
-                    {/* Instructions for photos */}
-                    <div className="max-w-3xl mx-auto text-center px-4">
-                      <p className="text-gray-600 italic bg-yellow-50 p-4 rounded-lg border border-yellow-200">
-                        💡 <strong>Tip:</strong> To share photos, upload them to Google Photos, Dropbox, or iCloud and paste the shareable links in the form below.
-                      </p>
-                    </div>
-
-                    {/* Google Form Embed */}
-                    <div className="max-w-4xl mx-auto bg-white p-4 rounded-xl shadow-lg border border-gray-200">
-                      <h2 className="text-2xl font-bold text-center mb-4">Tell Us About Your Property</h2>
-                      <div className="overflow-hidden rounded-lg border border-gray-300">
-                        <iframe
-                          src="https://docs.google.com/forms/d/e/1FAIpQLSf6fYKotH7svYGF_ZtFHppvvuQa_FBdhMo50CKSQozZspngOw/viewform?embedded=true"
-                          width="100%"
-                          height="1400"
-                          frameBorder="0"
-                          marginHeight="0"
-                          marginWidth="0"
-                          title="Sell Your Property - Barakah Homes"
-                        >
-                          Loading…
-                        </iframe>
+                    <div className="max-w-3xl mx-auto">
+                      {/* Tally.so Inline Embed */}
+                      <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-200">
+                        <div className="tally-form mb-6" data-tally-src="https://tally.so/r/44aKNY" style={{ width: '100%', height: '900px' }}>
+                          {/* Fallback for non-JS users */}
+                          <p className="text-gray-600 text-center py-8">
+                            Loading the property submission form...<br/>
+                            <a href="https://tally.so/r/44aKNY" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-bold">
+                              Click here if it doesn't load
+                            </a>
+                          </p>
+                        </div>
                       </div>
-                    </div>
-
-                    <div className="max-w-2xl mx-auto text-center mt-6">
-                      <p className="text-gray-600 mb-2">Prefer to talk directly?</p>
-                      <p className="text-lg font-bold">
-                        Call us at <a href={`tel:${contactInfo.phone.replace(/-/g, '')}`} className="text-red-600">{contactInfo.phone}</a>
-                      </p>
+                      <div className="mt-8 text-center">
+                        <p className="text-gray-600 mb-4">Prefer to talk directly?</p>
+                        <p className="text-lg font-bold">Call us at <a href={`tel:${contactInfo.phone.replace(/-/g, '')}`} className="text-blue-600">{contactInfo.phone}</a></p>
+                      </div>
                     </div>
                   </div>
                 )}
 
-                {/* Refer & Earn */}
                 {activeTab === 'refer' && (
                   <div className="space-y-12">
                     <div className="text-center">
@@ -1005,6 +1004,12 @@
         };
         const root = ReactDOM.createRoot(document.getElementById('root'));
         root.render(<App />);
+
+        // Load Tally embed script
+        const tallyScript = document.createElement('script');
+        tallyScript.src = 'https://tally.so/widgets/embed.js';
+        tallyScript.async = true;
+        document.head.appendChild(tallyScript);
     </script>
     <!-- Tawk.to Live Chat -->
     <script type="text/javascript">
