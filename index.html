@@ -14,51 +14,6 @@
 <body>
     <div id="root"></div>
     <script type="text/babel">
-        <!-- Tally.so Dynamic Loader for React SPA -->
-<script>
-  // Function to load Tally form dynamically
-  function loadTallyForm() {
-    const container = document.getElementById('tally-form-container');
-    if (!container || container.hasChildNodes()) return;
-
-    // Create iframe
-    const iframe = document.createElement('iframe');
-    iframe.setAttribute('data-tally-src', 'https://tally.so/embed/44aKNY?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1');
-    iframe.setAttribute('width', '100%');
-    iframe.setAttribute('height', '1400');
-    iframe.setAttribute('frameBorder', '0');
-    iframe.setAttribute('marginHeight', '0');
-    iframe.setAttribute('marginWidth', '0');
-    iframe.setAttribute('title', 'Sell Your House Fast – Get a Cash Offer in 24 h');
-    iframe.style.minWidth = '100%';
-    iframe.style.background = 'transparent';
-    iframe.setAttribute('loading', 'lazy');
-    container.appendChild(iframe);
-
-    // Load Tally embed script if not already loaded
-    if (typeof Tally === 'undefined') {
-      const script = document.createElement('script');
-      script.src = 'https://tally.so/widgets/embed.js';
-      script.onload = () => {
-        if (typeof Tally !== 'undefined') Tally.loadEmbeds();
-      };
-      document.head.appendChild(script);
-    } else {
-      Tally.loadEmbeds();
-    }
-  }
-
-  // Observe tab changes and load form when 'sell-property' is active
-  const observer = new MutationObserver(() => {
-    if (document.querySelector('[data-tab="sell-property"]') || 
-        window.location.hash === '#sell-property' ||
-        document.querySelector('.bg-gradient-to-r')?.parentElement?.innerText?.includes('Sell Your Distressed Property')) {
-      setTimeout(loadTallyForm, 300);
-    }
-  });
-
-  observer.observe(document.getElementById('root'), { childList: true, subtree: true });
-</script>
         const { useState } = React;
         const App = () => {
           const [activeTab, setActiveTab] = useState('home');
@@ -175,7 +130,7 @@
           };
           return (
             <div className="min-h-screen bg-gray-50">
-              {/* Navigation — now sticky with CTA on desktop */}
+              {/* Navigation — Now Sticky + CTA in Header */}
               <nav className="bg-gradient-to-r from-blue-900 to-green-800 text-white shadow-lg sticky top-0 z-50">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                   <div className="flex items-center justify-between h-16">
@@ -234,7 +189,7 @@
                 </div>
               </nav>
               <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-                {/* ✅ FULLY UPDATED HOME PAGE */}
+                {/* HOME PAGE — Fully Updated */}
                 {activeTab === 'home' && (
                   <div className="space-y-16">
                     {/* Hero Section – Dual Audience */}
@@ -411,7 +366,7 @@
                   </div>
                 )}
 
-                {/* About Us Page */}
+                {/* All other pages: About, Services, Gallery, Reviews, Contact, Refer — unchanged */}
                 {activeTab === 'about' && (
                   <div className="space-y-12">
                     <div className="text-center">
@@ -465,7 +420,6 @@
                   </div>
                 )}
 
-                {/* Services Page */}
                 {activeTab === 'services' && (
                   <div className="space-y-12">
                     <div className="text-center">
@@ -529,7 +483,6 @@
                   </div>
                 )}
 
-                {/* Gallery/Projects Page */}
                 {activeTab === 'gallery' && (
                   <div className="space-y-12">
                     <div className="text-center">
@@ -567,7 +520,6 @@
                   </div>
                 )}
 
-                {/* Reviews Page */}
                 {activeTab === 'reviews' && (
                   <div className="space-y-12">
                     <div className="text-center">
@@ -650,7 +602,6 @@
                   </div>
                 )}
 
-                {/* Contact Page */}
                 {activeTab === 'contact' && (
                   <div className="space-y-12">
                     <div className="text-center">
@@ -789,87 +740,58 @@
                   </div>
                 )}
 
-                {/* Sell Property Page — Tally.so Embedded */}
-{activeTab === 'sell-property' && (
-  <div className="space-y-12">
-    <div className="text-center">
-      <h1 className="text-4xl font-bold mb-4">Sell Your Distressed Property</h1>
-      <p className="text-xl text-gray-600">We buy houses in any condition - no repairs needed!</p>
-    </div>
-    <div className="bg-gradient-to-r from-red-500 to-orange-500 text-white rounded-xl p-8 text-center mb-12 shadow-xl">
-      <h2 className="text-2xl font-bold mb-4">Why Sell to Us?</h2>
-      <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-        <div>
-          <div className="text-3xl mb-2">💰</div>
-          <h3 className="font-bold">Fair Cash Offers</h3>
-          <p>Get a competitive offer without the hassle of traditional sales</p>
-        </div>
-        <div>
-          <div className="text-3xl mb-2">⚡</div>
-          <h3 className="font-bold">Fast Closing</h3>
-          <p>Close in as little as 7 days - no waiting for bank approvals</p>
-        </div>
-        <div>
-          <div className="text-3xl mb-2">🏠</div>
-          <h3 className="font-bold">As-Is Condition</h3>
-          <p>No need to make repairs or clean up - we buy properties in any condition</p>
-        </div>
-      </div>
-    </div>
-
-    {/* Tally Form Container */}
-    <div className="max-w-3xl mx-auto">
-      <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-200">
-        <h2 className="text-2xl font-bold text-center mb-6">Tell Us About Your Property</h2>
-        <div id="tally-form-container">
-          {/* Tally iframe will be inserted here by script */}
-        </div>
-      </div>
-    </div>
-
-    <div className="max-w-3xl mx-auto mt-8 text-center">
-      <p className="text-gray-600 mb-4">Prefer to talk directly?</p>
-      <p className="text-lg font-bold">
-        Call us at{' '}
-        <a href={`tel:${contactInfo.phone.replace(/-/g, '')}`} className="text-blue-600">
-          {contactInfo.phone}
-        </a>
-      </p>
-    </div>
-  </div>
-)}
-
-                    {/* ✅ Tally.so Embed */}
+                {/* ✅ SELL PROPERTY PAGE — WITH TALLY.SO FORM */}
+                {activeTab === 'sell-property' && (
+                  <div className="space-y-12">
+                    <div className="text-center">
+                      <h1 className="text-4xl font-bold mb-4">Sell Your Distressed Property</h1>
+                      <p className="text-xl text-gray-600">We buy houses in any condition - no repairs needed!</p>
+                    </div>
+                    <div className="bg-gradient-to-r from-red-500 to-orange-500 text-white rounded-xl p-8 text-center mb-12 shadow-xl">
+                      <h2 className="text-2xl font-bold mb-4">Why Sell to Us?</h2>
+                      <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+                        <div>
+                          <div className="text-3xl mb-2">💰</div>
+                          <h3 className="font-bold">Fair Cash Offers</h3>
+                          <p>Get a competitive offer without the hassle of traditional sales</p>
+                        </div>
+                        <div>
+                          <div className="text-3xl mb-2">⚡</div>
+                          <h3 className="font-bold">Fast Closing</h3>
+                          <p>Close in as little as 7 days - no waiting for bank approvals</p>
+                        </div>
+                        <div>
+                          <div className="text-3xl mb-2">🏠</div>
+                          <h3 className="font-bold">As-Is Condition</h3>
+                          <p>No need to make repairs or clean up - we buy properties in any condition</p>
+                        </div>
+                      </div>
+                    </div>
                     <div className="max-w-3xl mx-auto">
                       <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-200">
                         <h2 className="text-2xl font-bold text-center mb-6">Tell Us About Your Property</h2>
+                        {/* ✅ Tally.so Form — using direct src */}
                         <iframe
-                          data-tally-src="https://tally.so/embed/44aKNY?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
-                          loading="lazy"
+                          src="https://tally.so/embed/44aKNY?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
                           width="100%"
-                          height="1284"
+                          height="1400"
                           frameBorder="0"
                           marginHeight="0"
                           marginWidth="0"
                           title="Sell Your House Fast – Get a Cash Offer in 24 h"
-                          style={{ minWidth: '100%', background: 'transparent' }}
+                          loading="lazy"
                         ></iframe>
                       </div>
                     </div>
-
                     <div className="max-w-3xl mx-auto mt-8 text-center">
                       <p className="text-gray-600 mb-4">Prefer to talk directly?</p>
                       <p className="text-lg font-bold">
-                        Call us at{' '}
-                        <a href={`tel:${contactInfo.phone.replace(/-/g, '')}`} className="text-blue-600">
-                          {contactInfo.phone}
-                        </a>
+                        Call us at <a href={`tel:${contactInfo.phone.replace(/-/g, '')}`} className="text-blue-600">{contactInfo.phone}</a>
                       </p>
                     </div>
                   </div>
                 )}
 
-                {/* Refer & Earn Page */}
                 {activeTab === 'refer' && (
                   <div className="space-y-12">
                     <div className="text-center">
@@ -1099,30 +1021,5 @@
     s0.parentNode.insertBefore(s1,s0);
     })();
     </script>
-
-    <!-- ✅ Tally.so Embed Script -->
-    <!-- Tally.so Embed Script -->
-<script>
-  var d = document,
-      w = "https://tally.so/widgets/embed.js",
-      v = function() {
-        if (typeof Tally !== "undefined") {
-          Tally.loadEmbeds();
-        } else {
-          d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach(function(iframe) {
-            iframe.src = iframe.dataset.tallySrc;
-          });
-        }
-      };
-  if (typeof Tally !== "undefined") {
-    v();
-  } else if (!d.querySelector('script[src="' + w + '"]')) {
-    var s = d.createElement("script");
-    s.src = w;
-    s.onload = v;
-    s.onerror = v;
-    d.body.appendChild(s);
-  }
-</script>
 </body>
 </html>
